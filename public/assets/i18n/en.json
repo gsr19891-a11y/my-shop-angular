@@ -1,0 +1,247 @@
+{
+  
+  "header": {
+    "home": "Home",
+    "shop": "Shop",
+    "categories": "Categories",
+    "signIn": "Sign In",
+    "favorites": "Favorites",
+    "profile": "My Profile",
+    "logout": "Logout",
+    "changeLang": "Change Language"
+  },
+
+  "home": {
+    "hero": {
+      "badge": "New Arrivals",
+      "title": "Discover the Future of {{highlight}}",
+      "highlight": "Technology",
+      "description": "Shop the latest smartphones, laptops, and cutting-edge electronics from top brands. Free shipping on orders over $100.",
+      "button": "Shop Now"
+    },
+    "modelCategories": {
+      "smartphones": "Smartphones",
+      "audio": "Audio",
+      "laptops": "Laptops"
+    },
+    "categories": {
+      "title": "Shop by Category",
+      "description": "Browse our wide selection of tech categories",
+      "viewAll": "View All",
+      "products": "Products"
+    },
+    "featured": {
+      "title": "Featured Products",
+      "description": "Handpicked tech essentials just for you",
+      "viewAll": "View All"
+    },
+    "promo": {
+      "badge": "Limited Time Offer",
+      "title": "Get 20% Off on All Accessories",
+      "description": "Use code {{code}} at checkout. Valid until end of month",
+      "code": "TECH20",
+      "button": "Shop Accessories"
+    },
+    "newArrivals": {
+      "badge": "JUST IN",
+      "title": "New Arrivals",
+      "description": "The latest additions to our collection",
+      "viewAll": "View All"
+    },
+    "info": {
+      "freeShipping": {
+        "title": "Free Shipping",
+        "description": "On orders over $100"
+      },
+      "securePayment": {
+        "title": "Secure Payment",
+        "description": "100% secure transactions"
+      },
+      "returns": {
+        "title": "Easy Returns",
+        "description": "30-day return policy"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Dedicated customer care"
+      }
+    }
+  },
+  
+  "shop": {
+    "header": {
+      "title": "All Products",
+      "subtitle": "Discover our full range of tech products"
+    },
+    "filters": {
+      "categories": "Categories",
+      "rating": {
+        "title": "Min Rating",
+        "up": "& up"
+      },
+      "price": {
+        "title": "Price Range",
+        "min": "Min",
+        "max": "Max"
+      },
+      "availability": {
+        "title": "Availability",
+        "inStock": "In Stock Only"
+      },
+      "buttons": {
+        "apply": "Apply",
+        "clear": "Clear All Filters"
+      }
+    },
+    "toolbar": {
+      "filters": "Filters",
+      "searchPlaceholder": "Search products...",
+      "sort": {
+        "default": "Sort by",
+        "priceLowHigh": "Price: Low to High",
+        "priceHighLow": "Price: High to Low",
+        "name": "Name: A-Z",
+        "newest": "Newest First",
+        "rating": "Top Rated"
+      },
+      "sortButton": "Sort"
+    },
+    "products": {
+      "noResults": {
+        "title": "No products found",
+        "description": "Try adjusting your search or filters to find what you're looking for.",
+        "clear": "Clear Filters"
+      }
+    },
+    "pagination": {
+      "perPage": "per page"
+    }
+  },
+  
+  "product": {
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "available": "available",
+    "addToCart": "Add to Cart",
+    "tabs": {
+      "description": "Description",
+      "reviews": "Reviews"
+    }
+  
+},
+
+  "productCart": {
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "available": "available",
+    "addToCart": "Add to Cart",
+    "tabs": {
+      "description": "Description",
+      "reviews": "Reviews"
+    }
+  },
+  
+  "user": {
+    "nav": {
+      "profile": "My Profile",
+      "cart": "Cart",
+      "favorites": "Favorites",
+      "settings": "Settings"
+    },
+    "logout": "Logout"
+  },
+  
+  "cart": {
+    "title": "Shopping Cart",
+    "itemsInCart": "items in your cart",
+    "itemsTitle": "Cart Items",
+    "clear": "Clear Cart",
+    "loading": "Loading your cart...",
+    "continueShopping": "Continue Shopping",
+    "items": "items",
+    "checkout": "Proceed to Checkout",
+    "secure": "Secure checkout guaranteed",
+    "summary": {
+      "title": "Order Summary",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "free": "FREE",
+      "total": "Total"
+    },
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Looks like you haven't added anything to your cart yet. Start exploring our products!"
+    }
+  
+},
+
+  "favorites": {
+    "title": "My Favorites",
+    "itemsInFavorites": "items in your favorites",
+    "model": "Model",
+    "addToCart": "Add to Cart",
+    "empty": "Your favorites list is empty."
+  },
+  
+  "settings": {
+    "title": "Account Settings",
+    "subtitle": "Manage your security and account preferences",
+
+    "changePassword": {
+      "title": "Change Password",
+      "currentPassword": "Current Password",
+      "currentPasswordPlaceholder": "Enter your current password",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Enter your new password",
+      "confirmPassword": "Confirm New Password",
+      "confirmPasswordPlaceholder": "Confirm your new password",
+      "updateButton": "Update Password"
+    },
+
+    "dangerZone": {
+      "title": "Danger Zone",
+      "deleteAccount": {
+        "title": "Delete Account",
+        "warning": "Once you delete your account, there is no going back. Please be certain.",
+        "heading": "Delete your account",
+        "description": "This will permanently delete your account, including all your data, orders, and preferences.",
+        "button": "Delete Account"
+      }
+    }
+  
+},
+  
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your personal information and preferences",
+
+    "picture": {
+      "title": "Profile Picture"
+    },
+
+    "upload": {
+      "title": "Upload your photo",
+      "subtitle": "Enter a URL to your profile picture",
+      "urlPlaceholder": "https://example.com/avatar.jpg"
+    },
+
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "address": "Address",
+      "birthDate": "Date of Birth",
+      "save": "Save Changes"
+    }
+  
+}
+
+
+
+
+
+  
+}
+
+

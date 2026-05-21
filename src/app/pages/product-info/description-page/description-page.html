@@ -1,0 +1,16 @@
+<div class="product-details-tabs">
+    
+      <div class="tab-content">
+        <h3>Product Description</h3>
+        <p>{{productId?.data?.description}}</p>
+
+        <h3 style="margin-top: 20px;">Specifications</h3>
+        <ul>
+  @for (spec of productId?.data?.specifications | keyvalue; track spec.key) {
+    <li>
+      <strong>{{ spec.key }}:</strong> {{ spec.value }}
+    </li>
+  }
+</ul>
+      </div>
+    </div>

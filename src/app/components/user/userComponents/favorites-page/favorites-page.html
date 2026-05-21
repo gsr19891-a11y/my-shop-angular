@@ -1,0 +1,69 @@
+@if(langService.isLoaded()){
+<div class="favorite-cart-wrapper">
+  <section class="container">
+    <header class="cart-header">
+      <h1>{{ 'favorites.title' | translate }}</h1>
+      @if (productService.favoriteCount() > 0) {
+        <p>
+          {{ productService.favoriteCount() }}
+          {{ 'favorites.itemsInFavorites' | translate }}
+        </p>
+      }
+    </header>
+
+    <div class="product-container">
+   
+      @for (product of productService.allFavoritesCart(); track product.id) {
+        <div class="product-card" (click)="showProductDetails(product.id)">
+          
+          <button class="wishlist-btn" 
+                  (click)="deleteFavorites(product.id); $event.stopPropagation()">
+            <i class="fa-solid fa-heart"></i>
+          </button>
+
+          <div class="product-image">
+            <img [src]="product.imageUrl" [alt]="product.name">
+          </div>
+
+          <div class="product-details">
+            <span class="brand-name">{{ product.brand }}</span>
+            <h3 class="product-title">{{ product.name }}</h3>
+
+            <p class="product-model">
+              {{ 'favorites.model' | translate }}: {{ product.model }}
+            </p>
+
+            <div class="category-badge">
+              <i class="fa-solid fa-table-cells-large"></i>
+              {{ product.category?.name }}
+            </div>
+
+            <div class="rating-container">
+              <div class="stars">
+                @for (starClass of getStars(product.rating); track $index) {
+                  <i [className]="starClass"></i>
+                }
+              </div>
+              <span class="rating-value">({{ product.rating?.toFixed(1) }})</span>
+            </div>
+
+            <div class="price-tag">
+              USD {{ product.price | number }}
+            </div>
+
+            <button class="add-to-cart" (click)="addToCart(product.id); $event.stopPropagation()"
+            [disabled]="product?.stock <= 0">
+              <i class="fa-solid fa-cart-shopping"></i>
+              {{ 'favorites.addToCart' | translate }}
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-list">
+          <p>{{ 'favorites.empty' | translate }}</p>
+        </div>
+      }
+    </div>
+  </section>
+</div>
+}

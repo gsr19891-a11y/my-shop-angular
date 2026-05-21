@@ -1,0 +1,43 @@
+@if(langService.isLoaded()){
+<div class="featured-section-card" (click)="showProductDetails(product.id)">
+  <div class="img-div">
+    <img [src]="product.imageUrl" [alt]="product.name" />
+  </div>
+
+  <div class="card-nav">
+    <div class="icon" 
+         [class.is-favorite]="isProductFavorite(product.id)" 
+         (click)="toggleFavorite(product.id); $event.stopPropagation()">
+      <i [class]="isProductFavorite(product.id) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+    </div>
+  </div>
+
+  <div class="featured-section-card-info">
+    <div class="featured-section-card-brand">
+      <span class="span-name">{{ product.category.name }}</span>
+      <i class="fa-solid fa-circle"></i>
+      <span class="span-brand">{{ product.brand }}</span>
+    </div>
+
+    <h3 class="featured-section-card-name">{{ product.name }}</h3>
+
+    <div class="rating-container">
+      <div class="stars">
+        @for (starClass of getStars(product.rating); track $index) {
+          <i [className]="starClass"></i>
+        }
+      </div>
+      <span class="rating-value">({{ product.rating?.toFixed(1) }})</span>
+    </div>
+
+    <span class="current-price">USD {{ product.price }}</span>
+ 
+    <button class="add-to-cart-btn"
+            (click)="addToCart(product.id); $event.stopPropagation()"
+            [disabled]="product?.stock <= 0">
+      <i class="fa-solid fa-cart-shopping"></i>
+      {{ 'product.addToCart' | translate }}
+    </button>
+  </div>
+</div>
+}

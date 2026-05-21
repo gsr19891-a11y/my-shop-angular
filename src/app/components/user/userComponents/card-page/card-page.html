@@ -1,0 +1,116 @@
+@if(langService.isLoaded()){
+<div class="shopping-cart-wrapper">
+  <div class="container">
+    <header class="cart-header">
+      <h1>{{ 'cart.title' | translate }}</h1>
+      @if (cartItems && cartItems.data) {
+        <p>{{ cartItems.data.totalCount }} {{ 'cart.itemsInCart' | translate }}</p>
+      }
+    </header>
+
+    <div class="cart-layout">
+    
+      <section class="cart-items-section">
+        <div class="section-title">
+          <h2>{{ 'cart.itemsTitle' | translate }}</h2>
+          <button class="btn-clear" (click)=" clearCart()">
+            <i class="fa-regular fa-trash-can"></i> {{ 'cart.clear' | translate }}
+          </button>
+        </div>
+
+        <div class="items-list">
+          @if (cartItems && cartItems.data) {
+            @for (item of cartItems.data.items; track item.id) {
+              <div class="cart-item-card">
+                <div class="product-img">
+                  <img [src]="item.product.imageUrl" [alt]="item.product.name">
+                </div>
+
+                <div class="product-details">
+                  <h3>{{ item.product.name }}</h3>
+                  <span class="brand">{{ item.product.brand }}</span>
+                </div>
+
+                <div class="unit-price">
+                  ${{ item.product.price | number:'1.0-0' }}
+                </div>
+
+                <div class="quantity-picker">
+                  <button class="q-btn" (click)="changeQuantity(item, -1)" [disabled]="item.quantity <= 1">-</button>
+                  <span class="q-value">{{ item.quantity }}</span>
+                  <button class="q-btn" (click)="changeQuantity(item, 1)">+</button>
+                </div>
+
+                <div class="total-item-price">
+                  <strong>USD {{ item.totalPrice | number:'1.0-0' }}</strong>
+                </div>
+
+                <button class="btn-remove" (click)="removeCart(item.id)">×</button>
+              </div>
+            }
+          } @else {
+            <div class="loading">{{ 'cart.loading' | translate }}</div>
+          }
+        </div>
+
+        @if(cartItems?.data?.items?.length) {
+          <a routerLink="/shop" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> {{ 'cart.continueShopping' | translate }}
+          </a>
+        }
+      </section>
+
+      <aside class="order-summary-card">
+
+        @if(cartItems?.data?.items?.length) {
+        
+        <h2>{{ 'cart.summary.title' | translate }}</h2>
+        
+        <div class="summary-line">
+          <span>
+            {{ 'cart.summary.subtotal' | translate }}
+            (@if(cartItems){ {{cartItems.data.totalCount}} } {{ 'cart.items' | translate }})
+          </span>
+          @if(cartItems) {
+            <strong>${{ cartItems.data.items[0]?.totalPrice | number }}</strong> 
+          }
+        </div>
+
+        <div class="summary-line">
+          <span>{{ 'cart.summary.shipping' | translate }}</span>
+          <span class="free-text">{{ 'cart.summary.free' | translate }}</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="total-line">
+          <span>{{ 'cart.summary.total' | translate }}</span>
+          <span class="final-price">
+            @if(cartItems){ USD {{ grandTotal | number }} }
+          </span>
+        </div>
+
+        <button class="btn-checkout" (click)="onCheckout()">
+          {{ 'cart.checkout' | translate }} <i class="fa-solid fa-lock"></i>
+        </button>
+
+        <div class="secure-footer">
+          <i class="fa-solid fa-shield-check"></i> {{ 'cart.secure' | translate }}
+        </div>
+
+      } @else {
+        <div class="empty-cart-div">
+          <i class="fa-solid fa-cart-shopping icon-basket"></i>
+          <h2 class="empty-text">{{ 'cart.empty.title' | translate }}</h2>
+          <p class="empty-p">{{ 'cart.empty.description' | translate }}</p>
+          <button class="btn-continue" routerLink="/shop">
+            <i class="fa-solid fa-arrow-right"></i>{{ 'cart.continueShopping' | translate }}
+          </button>
+        </div>
+      }
+      </aside>
+    
+    </div>
+  </div>
+</div>
+}

@@ -1,0 +1,183 @@
+.featured-section-card {
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+           cursor: pointer;
+           width: 100%;
+
+          border: 1px solid rgb(179, 179, 179);
+          border-radius: 10px;
+          height: 550px;
+
+          .img-div {
+            width: 100%;
+            height: 340px;
+            overflow: hidden;
+            position: relative;
+            img {
+              transition: all 0.3s ease-in-out;
+              width: 100%;
+              height: 350px;
+              object-fit: cover;
+            }
+
+            .img-badge-new {
+              padding: 5px;
+              border-radius: 10px;
+              margin: 10px;
+              font-size: 11px;
+              background-color: #4acc78;
+              color: white;
+              z-index: 10;
+              position: absolute;
+              top: 0;
+
+              left: 0;
+            }
+          } //img-div
+
+          .featured-section-card-info {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+
+            .featured-section-card-brand {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              .span-brand {
+                font-size: 11px;
+                color: #535353;
+              }
+              .span-name {
+                font-size: 11px;
+                color: #1db954;
+              }
+              i {
+                font-size: 2px;
+              }
+            } //featured-section-card-brand
+
+            .featured-section-card-name {
+              font-size: 15px;
+            }
+
+            .featured-section-card-rating {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+
+              i {
+                font-size: 11px;
+              }
+            }
+
+            .rating-value {
+              font-size: 13px;
+            }
+
+           
+          }
+
+          .card-nav {
+            position: absolute;
+            top: 10px;
+            right: -50px;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.4s ease-in-out;
+            opacity: 0;
+            z-index: 99;
+            .icon {
+              padding: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 30px;
+              height: 30px;
+              background-color: white;
+              border-radius: 50%;
+              border: 1px solid rgb(179, 179, 179);
+              cursor: pointer;
+              color: rgb(110, 110, 110);
+
+              &:hover,
+              &.active {
+                color: red;
+              }
+              &.is-favorite {
+    color: #ff4d4d; 
+    
+    i {
+      
+      filter: drop-shadow(0 0 5px rgba(255, 77, 77, 0.4));
+    }
+  }
+             
+            }
+          }
+
+          .stars {
+  .gold {
+    color: #f1c40f; 
+  }
+  .gray {
+    color: #e0e0e0;
+  }
+}
+
+          .current-price {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: 700;
+           
+          }
+
+          .add-to-cart-btn {
+            margin: 20px 30px;
+            font-size: 14px;
+            padding: 10px 20px;
+            background-color: #e6e6e6;
+            border: 1px solid rgb(179, 179, 179);
+            border-radius: 7px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            &:disabled {
+              opacity: 0.7;
+              cursor: not-allowed;
+              font-size: 0;
+
+              &::after {
+                content: 'Out of stock';
+                font-size: 14px;
+                display: block;
+              }
+              
+            }
+            &:hover {
+              background-color: #1db954;
+              color: white;
+            }
+          }
+
+          transition: all 0.3s ease-in-out;
+          &:hover {
+            img {
+              scale: 1.05;
+            }
+
+            .card-nav {
+              right: 18px;
+              opacity: 1;
+            }
+
+            transform: scale(1.02);
+            border: #1db954 1px solid;
+            box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
+          }
+        } //featured-section-card-info
+    

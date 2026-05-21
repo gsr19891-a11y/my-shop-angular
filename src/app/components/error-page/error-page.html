@@ -1,0 +1,25 @@
+<div class="error-wrapper">
+  <div class="error-container">
+    <div class="error-image">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+    
+    <h1 class="error-code">404</h1>
+    <h2 class="error-title">Page Not Found</h2>
+    <p class="error-message">
+      The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+    </p>
+
+    <div class="error-actions">
+      <button class="btn-home" (click)="goHome()">
+        <i class="fa-solid fa-house"></i>
+        Back to Home
+      </button>
+      
+      <button class="btn-back" (click)="goBack()">
+        <i class="fa-solid fa-arrow-left"></i>
+        Previous Page
+      </button>
+    </div>
+  </div>
+</div>

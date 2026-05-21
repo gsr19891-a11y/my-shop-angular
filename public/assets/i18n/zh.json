@@ -1,0 +1,234 @@
+{
+  "header": {
+    "home": "首页",
+    "shop": "商店",
+    "categories": "分类",
+    "signIn": "登录",
+    "favorites": "收藏",
+    "profile": "我的资料",
+    "logout": "退出登录",
+    "changeLang": "切换语言"
+  },
+
+  "home": {
+    "hero": {
+      "badge": "新品上市",
+      "title": "探索{{highlight}}的未来",
+      "highlight": "科技",
+      "description": "购买最新智能手机、笔记本电脑和尖端电子产品，来自顶级品牌。满100美元免运费。",
+      "button": "立即购买"
+    },
+    "modelCategories": {
+      "smartphones": "智能手机",
+      "audio": "音频",
+      "laptops": "笔记本电脑"
+    },
+    "categories": {
+      "title": "按分类购物",
+      "description": "浏览我们丰富的科技分类",
+      "viewAll": "查看全部",
+      "products": "商品"
+    },
+    "featured": {
+      "title": "精选商品",
+      "description": "为你精心挑选的科技必备品",
+      "viewAll": "查看全部"
+    },
+    "promo": {
+      "badge": "限时优惠",
+      "title": "所有配件享受20%折扣",
+      "description": "结账时使用代码 {{code}}。有效期至本月底",
+      "code": "TECH20",
+      "button": "购买配件"
+    },
+    "newArrivals": {
+      "badge": "新品",
+      "title": "新到商品",
+      "description": "我们系列中的最新产品",
+      "viewAll": "查看全部"
+    },
+    "info": {
+      "freeShipping": {
+        "title": "包邮",
+        "description": "订单满100美元"
+      },
+      "securePayment": {
+        "title": "安全支付",
+        "description": "100%安全交易"
+      },
+      "returns": {
+        "title": "轻松退货",
+        "description": "30天退货政策"
+      },
+      "support": {
+        "title": "24/7支持",
+        "description": "专属客户服务"
+      }
+    }
+  },
+
+  "shop": {
+    "header": {
+      "title": "所有商品",
+      "subtitle": "探索我们完整的科技产品系列"
+    },
+    "filters": {
+      "categories": "分类",
+      "rating": {
+        "title": "最低评分",
+        "up": "及以上"
+      },
+      "price": {
+        "title": "价格范围",
+        "min": "最低",
+        "max": "最高"
+      },
+      "availability": {
+        "title": "库存情况",
+        "inStock": "仅显示有库存"
+      },
+      "buttons": {
+        "apply": "应用",
+        "clear": "清除所有筛选"
+      }
+    },
+    "toolbar": {
+      "filters": "筛选",
+      "searchPlaceholder": "搜索商品...",
+      "sort": {
+        "default": "排序方式",
+        "priceLowHigh": "价格：从低到高",
+        "priceHighLow": "价格：从高到低",
+        "name": "名称：A-Z",
+        "newest": "最新优先",
+        "rating": "评分最高"
+      },
+      "sortButton": "排序"
+    },
+    "products": {
+      "noResults": {
+        "title": "未找到商品",
+        "description": "请尝试调整搜索或筛选条件。",
+        "clear": "清除筛选"
+      }
+    },
+    "pagination": {
+      "perPage": "每页"
+    }
+  },
+
+  "product": {
+    "inStock": "有库存",
+    "outOfStock": "缺货",
+    "available": "可用",
+    "addToCart": "加入购物车",
+    "tabs": {
+      "description": "描述",
+      "reviews": "评价"
+    }
+  },
+
+  "productCart": {
+    "inStock": "有库存",
+    "outOfStock": "缺货",
+    "available": "可用",
+    "addToCart": "加入购物车",
+    "tabs": {
+      "description": "描述",
+      "reviews": "评价"
+    }
+  },
+
+  "user": {
+    "nav": {
+      "profile": "我的资料",
+      "cart": "购物车",
+      "favorites": "收藏",
+      "settings": "设置"
+    },
+    "logout": "退出登录"
+  },
+
+  "cart": {
+    "title": "购物车",
+    "itemsInCart": "件商品在购物车中",
+    "itemsTitle": "购物车商品",
+    "clear": "清空购物车",
+    "loading": "正在加载购物车...",
+    "continueShopping": "继续购物",
+    "items": "件商品",
+    "checkout": "去结算",
+    "secure": "安全支付保障",
+    "summary": {
+      "title": "订单摘要",
+      "subtotal": "小计",
+      "shipping": "运费",
+      "free": "免费",
+      "total": "总计"
+    },
+    "empty": {
+      "title": "你的购物车是空的",
+      "description": "你还没有添加任何商品，开始浏览我们的产品吧！"
+    }
+  },
+
+  "favorites": {
+    "title": "我的收藏",
+    "itemsInFavorites": "件收藏商品",
+    "model": "型号",
+    "addToCart": "加入购物车",
+    "empty": "你的收藏列表是空的。"
+  },
+
+  "settings": {
+    "title": "账户设置",
+    "subtitle": "管理你的安全和账户偏好",
+
+    "changePassword": {
+      "title": "修改密码",
+      "currentPassword": "当前密码",
+      "currentPasswordPlaceholder": "请输入当前密码",
+      "newPassword": "新密码",
+      "newPasswordPlaceholder": "请输入新密码",
+      "confirmPassword": "确认新密码",
+      "confirmPasswordPlaceholder": "确认新密码",
+      "updateButton": "更新密码"
+    },
+
+    "dangerZone": {
+      "title": "危险区域",
+      "deleteAccount": {
+        "title": "删除账户",
+        "warning": "一旦删除账户，将无法恢复，请谨慎操作。",
+        "heading": "删除你的账户",
+        "description": "这将永久删除你的账户，包括所有数据、订单和偏好设置。",
+        "button": "删除账户"
+      }
+    }
+  },
+
+  "profile": {
+    "title": "我的资料",
+    "subtitle": "管理你的个人信息和偏好",
+
+    "picture": {
+      "title": "头像"
+    },
+
+    "upload": {
+      "title": "上传照片",
+      "subtitle": "输入你的头像URL",
+      "urlPlaceholder": "https://example.com/avatar.jpg"
+    },
+
+    "form": {
+      "firstName": "名字",
+      "lastName": "姓氏",
+      "email": "邮箱",
+      "phone": "电话号码",
+      "address": "地址",
+      "birthDate": "出生日期",
+      "save": "保存更改"
+    }
+  }
+}

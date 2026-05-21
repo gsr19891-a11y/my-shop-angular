@@ -1,0 +1,145 @@
+<section class="login-section">
+  <section class="login-info">
+    <div class="logo-container">
+      <div class="img-div" routerLink="/"><img src="assets/IconIMG.png" alt="Icon Image" /></div>
+      <h1 class="brand-name">STEP TECH</h1>
+    </div>
+
+    <p class="description">
+      Your one-stop shop for the latest smartphones, laptops, and cutting-edge electronics.
+    </p>
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-icon">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="stat-text">
+          <h3>Fast & Secure</h3>
+          <p>Enterprise-grade security to keep your data safe</p>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="stat-text">
+          <h3>Lightning Speed</h3>
+          <p>Experience blazing fast performance</p>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">
+          <i class="fa-solid fa-shield"></i>
+        </div>
+        <div class="stat-text">
+          <h3>24/7 Support</h3>
+          <p>Our team is always here to help you succeed</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="login-block">
+    <div class="header-content">
+      <div class="login-icon" routerLink="/">
+        <i class="fa-regular fa-user"></i>
+      </div>
+      <h2>Create your account</h2>
+      <p>Join thousands of users in less than a minute <i class="fa-solid fa-rocket"></i></p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="user-name-row">
+        <div class="field-container">
+          <div
+            class="input-group"
+            [class.error-border]="
+              registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched
+            "
+          >
+            <i class="fa-regular fa-user"></i>
+            <input type="text" placeholder="First name" formControlName="firstName" />
+          </div>
+          @if (registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched) {
+            <p class="error-message">Required</p>
+          }
+        </div>
+
+        <div class="field-container">
+          <div
+            class="input-group"
+            [class.error-border]="
+              registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched
+            "
+          >
+            <i class="fa-regular fa-user"></i>
+            <input type="text" placeholder="Last name" formControlName="lastName" />
+          </div>
+          @if (registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched) {
+            <p class="error-message">Required</p>
+          }
+        </div>
+      </div>
+
+      <div class="field-container">
+        <div
+          class="input-group"
+          [class.error-border]="
+            registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+          "
+        >
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" placeholder="Email address" formControlName="email" />
+        </div>
+        @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+          <p class="error-message">
+            @if (registerForm.get('email')?.errors?.['required']) {
+              Required
+            } @else if (registerForm.get('email')?.errors?.['email']) {
+              Enter a valid email address
+            }
+          </p>
+        }
+      </div>
+
+      <div class="field-container">
+        <div
+          class="input-group"
+          [class.error-border]="
+            registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+          "
+        >
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            placeholder="Password (min. 6 characters)"
+            formControlName="password"
+          />
+        </div>
+        @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+          <p class="error-message">Password must be at least 6 characters</p>
+        }
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        Create Account
+      </button>
+    </form>
+
+    <div class="or-divider">
+      <span class="line"></span>
+      <p class="or-text">or</p>
+      <span class="line"></span>
+    </div>
+
+    <div class="register-div">
+      <p>Already have an account? <span routerLink="/auth/login">Sign In</span></p>
+    </div>
+  </section>
+</section>

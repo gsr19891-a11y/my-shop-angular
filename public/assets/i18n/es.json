@@ -1,0 +1,234 @@
+{
+  "header": {
+    "home": "Inicio",
+    "shop": "Tienda",
+    "categories": "Categorías",
+    "signIn": "Iniciar sesión",
+    "favorites": "Favoritos",
+    "profile": "Mi perfil",
+    "logout": "Cerrar sesión",
+    "changeLang": "Cambiar idioma"
+  },
+
+  "home": {
+    "hero": {
+      "badge": "Nuevos productos",
+      "title": "Descubre el futuro de {{highlight}}",
+      "highlight": "la tecnología",
+      "description": "Compra los últimos smartphones, laptops y electrónica de última generación de las mejores marcas. Envío gratis en pedidos superiores a $100.",
+      "button": "Comprar ahora"
+    },
+    "modelCategories": {
+      "smartphones": "Smartphones",
+      "audio": "Audio",
+      "laptops": "Portátiles"
+    },
+    "categories": {
+      "title": "Comprar por categoría",
+      "description": "Explora nuestra amplia selección de categorías tecnológicas",
+      "viewAll": "Ver todo",
+      "products": "Productos"
+    },
+    "featured": {
+      "title": "Productos destacados",
+      "description": "Productos seleccionados especialmente para ti",
+      "viewAll": "Ver todo"
+    },
+    "promo": {
+      "badge": "Oferta por tiempo limitado",
+      "title": "Obtén 20% de descuento en todos los accesorios",
+      "description": "Usa el código {{code}} al finalizar la compra. Válido hasta fin de mes",
+      "code": "TECH20",
+      "button": "Comprar accesorios"
+    },
+    "newArrivals": {
+      "badge": "NUEVO",
+      "title": "Nuevos productos",
+      "description": "Las últimas incorporaciones a nuestra colección",
+      "viewAll": "Ver todo"
+    },
+    "info": {
+      "freeShipping": {
+        "title": "Envío gratis",
+        "description": "En pedidos superiores a $100"
+      },
+      "securePayment": {
+        "title": "Pago seguro",
+        "description": "Transacciones 100% seguras"
+      },
+      "returns": {
+        "title": "Devoluciones fáciles",
+        "description": "Política de devolución de 30 días"
+      },
+      "support": {
+        "title": "Soporte 24/7",
+        "description": "Atención al cliente dedicada"
+      }
+    }
+  },
+
+  "shop": {
+    "header": {
+      "title": "Todos los productos",
+      "subtitle": "Descubre toda nuestra gama de productos tecnológicos"
+    },
+    "filters": {
+      "categories": "Categorías",
+      "rating": {
+        "title": "Mín. valoración",
+        "up": "y más"
+      },
+      "price": {
+        "title": "Rango de precios",
+        "min": "Mín",
+        "max": "Máx"
+      },
+      "availability": {
+        "title": "Disponibilidad",
+        "inStock": "Solo en stock"
+      },
+      "buttons": {
+        "apply": "Aplicar",
+        "clear": "Borrar filtros"
+      }
+    },
+    "toolbar": {
+      "filters": "Filtros",
+      "searchPlaceholder": "Buscar productos...",
+      "sort": {
+        "default": "Ordenar por",
+        "priceLowHigh": "Precio: menor a mayor",
+        "priceHighLow": "Precio: mayor a menor",
+        "name": "Nombre: A-Z",
+        "newest": "Más nuevos",
+        "rating": "Mejor valorados"
+      },
+      "sortButton": "Ordenar"
+    },
+    "products": {
+      "noResults": {
+        "title": "No se encontraron productos",
+        "description": "Intenta ajustar tu búsqueda o filtros.",
+        "clear": "Borrar filtros"
+      }
+    },
+    "pagination": {
+      "perPage": "por página"
+    }
+  },
+
+  "product": {
+    "inStock": "En stock",
+    "outOfStock": "Agotado",
+    "available": "disponible",
+    "addToCart": "Añadir al carrito",
+    "tabs": {
+      "description": "Descripción",
+      "reviews": "Reseñas"
+    }
+  },
+
+  "productCart": {
+    "inStock": "En stock",
+    "outOfStock": "Agotado",
+    "available": "disponible",
+    "addToCart": "Añadir al carrito",
+    "tabs": {
+      "description": "Descripción",
+      "reviews": "Reseñas"
+    }
+  },
+
+  "user": {
+    "nav": {
+      "profile": "Mi perfil",
+      "cart": "Carrito",
+      "favorites": "Favoritos",
+      "settings": "Configuración"
+    },
+    "logout": "Cerrar sesión"
+  },
+
+  "cart": {
+    "title": "Carrito de compras",
+    "itemsInCart": "artículos en tu carrito",
+    "itemsTitle": "Artículos del carrito",
+    "clear": "Vaciar carrito",
+    "loading": "Cargando tu carrito...",
+    "continueShopping": "Seguir comprando",
+    "items": "artículos",
+    "checkout": "Proceder al pago",
+    "secure": "Pago seguro garantizado",
+    "summary": {
+      "title": "Resumen del pedido",
+      "subtotal": "Subtotal",
+      "shipping": "Envío",
+      "free": "GRATIS",
+      "total": "Total"
+    },
+    "empty": {
+      "title": "Tu carrito está vacío",
+      "description": "Parece que aún no has añadido productos. ¡Empieza a explorar!"
+    }
+  },
+
+  "favorites": {
+    "title": "Mis favoritos",
+    "itemsInFavorites": "artículos en favoritos",
+    "model": "Modelo",
+    "addToCart": "Añadir al carrito",
+    "empty": "Tu lista de favoritos está vacía."
+  },
+
+  "settings": {
+    "title": "Configuración de la cuenta",
+    "subtitle": "Gestiona la seguridad y preferencias de tu cuenta",
+
+    "changePassword": {
+      "title": "Cambiar contraseña",
+      "currentPassword": "Contraseña actual",
+      "currentPasswordPlaceholder": "Introduce tu contraseña actual",
+      "newPassword": "Nueva contraseña",
+      "newPasswordPlaceholder": "Introduce tu nueva contraseña",
+      "confirmPassword": "Confirmar nueva contraseña",
+      "confirmPasswordPlaceholder": "Confirma tu nueva contraseña",
+      "updateButton": "Actualizar contraseña"
+    },
+
+    "dangerZone": {
+      "title": "Zona peligrosa",
+      "deleteAccount": {
+        "title": "Eliminar cuenta",
+        "warning": "Una vez elimines tu cuenta, no podrás recuperarla. Asegúrate bien.",
+        "heading": "Eliminar tu cuenta",
+        "description": "Esto eliminará permanentemente tu cuenta, incluyendo todos tus datos, pedidos y preferencias.",
+        "button": "Eliminar cuenta"
+      }
+    }
+  },
+
+  "profile": {
+    "title": "Mi perfil",
+    "subtitle": "Gestiona tu información personal y preferencias",
+
+    "picture": {
+      "title": "Foto de perfil"
+    },
+
+    "upload": {
+      "title": "Sube tu foto",
+      "subtitle": "Introduce una URL de tu imagen de perfil",
+      "urlPlaceholder": "https://example.com/avatar.jpg"
+    },
+
+    "form": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico",
+      "phone": "Número de teléfono",
+      "address": "Dirección",
+      "birthDate": "Fecha de nacimiento",
+      "save": "Guardar cambios"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@if(langService.isLoaded()){
+@if (token) {
+  <main class="user-page">
+    <section class="user-navigation">
+  
+      <div class="user-card-header">
+        <div class="user-icon">
+          <span>{{ (user?.data?.firstName)?.slice(0,1)}}</span>
+          <span>{{ (user?.data?.lastName)?.slice(0,1)}}</span>
+        </div>
+        <h3>{{ user?.data?.firstName }} {{ user?.data?.lastName }}</h3>
+        <p>{{ user?.data?.email }}</p>
+      </div>
+
+      <div class="user-card-nav">
+        <nav>
+          <a class="card-ul" routerLink="/user/user-profile">
+            <div class="card-icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <p>{{ 'user.nav.profile' | translate }}</p>
+          </a>
+
+          <a class="card-ul" routerLink="/user/card-page">
+            <div class="card-icon">
+              <i class="fa-solid fa-box"></i>
+            </div>
+            <p>{{ 'user.nav.cart' | translate }}</p>
+          </a>
+
+          <a class="card-ul" routerLink="/user/favorites">
+            <div class="card-icon">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <p>{{ 'user.nav.favorites' | translate }}</p>
+          </a>
+
+          <a class="card-ul" routerLink="/user/settings">
+            <div class="card-icon">
+              <i class="fa-solid fa-gear"></i>
+            </div>
+            <p>{{ 'user.nav.settings' | translate }}</p>
+          </a>
+        </nav>
+
+        <div class="logout-btn" (click)="tokenDelete()">
+          <a class="logout-ul">
+            <div class="logout-icon">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </div>
+            <p>{{ 'user.logout' | translate }}</p>
+          </a>
+        </div>
+
+      </div>
+  
+    </section>
+
+    <div class="user-content">
+      <router-outlet></router-outlet>
+    </div>
+  
+  </main>
+}}

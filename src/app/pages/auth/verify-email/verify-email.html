@@ -1,0 +1,85 @@
+<section class="login-section">
+  <section class="login-info">
+    <div class="logo-container">
+      <div class="img-div" routerLink="/"><img src="assets/IconIMG.png" alt="Icon Image" /></div>
+      <h1 class="brand-name">Almost There!</h1>
+    </div>
+
+    <p class="description">
+    Just one more step to unlock exclusive tech deals and start shopping.
+    </p>
+
+    <div class="stats">
+        
+        <div class="stat">
+          <div class="stat-icon">
+            <i class="fa-solid fa-shield"></i>
+          </div>
+          <div class="stat-text">
+            <h3>Secure Account</h3>
+            <p>Your account security is our priority</p>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <div class="stat-text">
+            <h3>Quick Process</h3>
+            <p>Verification takes less than a minute</p>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">
+            <i class="fa-solid fa-user-group"></i>
+          </div>
+          <div class="stat-text">
+            <h3>Join the Community</h3>
+            <p>50,000+ verified tech enthusiasts</p>
+          </div>
+        </div>
+
+
+      </div>
+
+
+  </section>
+
+  <section class="login-block">
+    <div class="header-content">
+      <div class="login-icon" routerLink="/">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h2>Verify Your Email</h2>
+      <p>We've sent a 6-digit code to your email address</p>
+    </div>
+
+    <form [formGroup]="verifyEmailForm" (ngSubmit)="verifyEmail()">
+  <div class="field-container">
+    <div class="input-group">
+      <i class="fa-solid fa-envelope"></i>
+      <input type="text" placeholder="Enter 6-digit code" formControlName="code" />
+    </div>
+  </div>
+
+  <button type="submit" class="submit-btn" [disabled]="verifyEmailForm.invalid">
+    <i class="fa-regular fa-paper-plane"></i>
+    Verify Email
+  </button>
+</form>
+
+
+
+<div class="resend-div">
+    <p>Didn't receive the code?</p>
+    <span class="resend-link" (click)="resendCode()">Resend Code</span>
+</div>
+
+
+    <div class="register-div">
+      <span routerLink="/auth/login"> <i class="fa-solid fa-arrow-left"></i>Back to Login</span>
+    </div>
+  </section>
+</section>

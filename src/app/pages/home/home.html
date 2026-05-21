@@ -1,0 +1,208 @@
+
+@if(langService.isLoaded()){
+<main class="home-page">
+  <section class="main-section">
+    <div class="max-width">
+      <div class="main-block1">
+        <span class="main-block1-span">
+          <i class="fa-solid fa-bolt"></i>
+          {{ 'home.hero.badge' | translate }}
+        </span>
+
+        <h1 class="main-block1-h1">
+          {{
+            'home.hero.title'
+              | translate:{ highlight: ('home.hero.highlight' | translate) }
+          }}
+          <span class="green-word"></span>
+        </h1>
+
+        <p class="main-block1-p">
+          {{ 'home.hero.description' | translate }}
+        </p>
+
+        <div class="main-block1-button-div">
+          <button class="main-block1-btn1" routerLink="/shop">
+            {{ 'home.hero.button' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div class="main-block2">
+        <model-viewer class="asset"
+          [src]="currentModel" 
+          ar 
+          camera-controls 
+          shadow-intensity="2" 
+          disable-pan
+          disable-zoom
+          camera-orbit="145deg 95deg 100%"
+          style="width: 100%; height: 500px; background-color: unset; left: -50px;outline: none;">
+        </model-viewer>
+
+        <span class="main-block2-span1" (click)="changeModel('assets/iphone_17_pro_max.glb')">
+          <i class="fa-solid fa-mobile"></i>
+          {{ 'home.modelCategories.smartphones' | translate }}
+        </span>
+
+        <span class="main-block2-span2" (click)="changeModel('assets/headphone.glb')">
+          <i class="fa-regular fa-headphones"></i>
+          {{ 'home.modelCategories.audio' | translate }}
+        </span>
+
+        <span class="main-block2-span3" (click)="changeModel('assets/laptop.glb')">
+          <i class="fa-solid fa-laptop"></i>
+          {{ 'home.modelCategories.laptops' | translate }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories-section">
+    <div class="categories-section-header">
+      <div>
+        <h2>{{ 'home.categories.title' | translate }}</h2>
+        <p>{{ 'home.categories.description' | translate }}</p>
+      </div>
+      <a routerLink="/shop">
+        {{ 'home.categories.viewAll' | translate }}
+        <i class="fa-solid fa-angle-right"></i>
+      </a>
+    </div>
+
+    <div>
+      <div class="categories-section-cards">
+        @for (product of categories()?.data?.slice(0, 4); track product.id) {
+          <div class="categories-items" [routerLink]="['/shop']" [queryParams]="{ categoryId: product.id }">
+            <img [src]="product.imageUrl" [alt]="product.name" class="categories-section-img" />
+
+            <div class="categories-section-name">
+              <h3>{{ product.name }}</h3>
+              <p>
+                {{ product.productCount }}
+                {{ 'home.categories.products' | translate }}
+              </p>
+            </div>
+
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-section product-block">
+    <div class="max-width-second">
+      <div class="featured-section-header">
+        <div>
+          <h2>{{ 'home.featured.title' | translate }}</h2>
+          <p>{{ 'home.featured.description' | translate }}</p>
+        </div>
+        <a routerLink="/shop">
+          {{ 'home.featured.viewAll' | translate }}
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+      </div>
+
+      <div>
+        <div class="featured-section-cards">
+          @for (product of products()?.data?.items?.slice(0, 4); track product.id) {
+            <app-app-product-card [product]="product"></app-app-product-card>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-news-section">
+    <div class="news-block">
+      <span class="promo-tag">
+        {{ 'home.promo.badge' | translate }}
+      </span>
+
+      <h2>{{ 'home.promo.title' | translate }}</h2>
+
+      <p>
+        {{
+          'home.promo.description'
+            | translate:{ code: ('home.promo.code' | translate) }
+        }}
+      </p>
+
+      <button routerLink="/shop">
+        {{ 'home.promo.button' | translate }}
+      </button>
+
+      <div class="circle-1"></div>
+      <div class="circle-2"></div>
+    </div>
+  </section>
+
+  <section class="featured-section ">
+    <div class="max-width-second">
+      <div class="featured-section-header">
+        <div>
+          <span class="featured-section-badge">
+            {{ 'home.newArrivals.badge' | translate }}
+          </span>
+
+          <h2>{{ 'home.newArrivals.title' | translate }}</h2>
+
+          <p>{{ 'home.newArrivals.description' | translate }}</p>
+        </div>
+
+        <a routerLink="/shop"
+        [queryParams]="{sort:'newest'}"
+        >
+          {{ 'home.newArrivals.viewAll' | translate }}
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+      </div>
+
+      <div>
+        <div class="featured-section-cards">
+          @for (product of products()?.data?.items?.slice(4, 8); track product.id) {
+            <app-app-product-card [product]="product"></app-app-product-card>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="info-blocks">
+      <div class="info-card">
+        <div class="i-div">
+          <i class="fa-solid fa-truck-moving"></i>
+        </div>
+        <h3>{{ 'home.info.freeShipping.title' | translate }}</h3>
+        <p>{{ 'home.info.freeShipping.description' | translate }}</p>
+      </div>
+
+      <div class="info-card">
+        <div class="i-div">
+          <i class="fa-solid fa-shield"></i>
+        </div>
+        <h3>{{ 'home.info.securePayment.title' | translate }}</h3>
+        <p>{{ 'home.info.securePayment.description' | translate }}</p>
+      </div>
+
+      <div class="info-card">
+        <div class="i-div">
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </div>
+        <h3>{{ 'home.info.returns.title' | translate }}</h3>
+        <p>{{ 'home.info.returns.description' | translate }}</p>
+      </div>
+
+      <div class="info-card">
+        <div class="i-div">
+          <i class="fa-solid fa-message"></i>
+        </div>
+        <h3>{{ 'home.info.support.title' | translate }}</h3>
+        <p>{{ 'home.info.support.description' | translate }}</p>
+      </div>
+    </div>
+  </section>
+</main>
+}

@@ -1,0 +1,90 @@
+@if(langService.isLoaded()){
+<div class="settings-wrapper">
+  <header class="settings-header">
+    <h1>{{ 'settings.title' | translate }}</h1>
+    <p>{{ 'settings.subtitle' | translate }}</p>
+  </header>
+
+  <section class="settings-card">
+    <div class="card-header">
+      <i class="fa-solid fa-lock"></i>
+      <span>{{ 'settings.changePassword.title' | translate }}</span>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="changePassForm" (ngSubmit)="changePass()">
+
+        <div class="full-width">
+          <label><span>*</span> {{ 'settings.changePassword.currentPassword' | translate }}</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-lock-open prefix"></i>
+            <input type="password" formControlName="currentPassword"
+                   [placeholder]="'settings.changePassword.currentPasswordPlaceholder' | translate">
+            <i class="fa-regular fa-eye suffix"></i>
+          </div>
+        </div>
+
+        <div class="grid-row">
+          <div class="input-group">
+            <label><span>*</span> {{ 'settings.changePassword.newPassword' | translate }}</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock prefix"></i>
+              <input type="password" formControlName="newPassword"
+                     [placeholder]="'settings.changePassword.newPasswordPlaceholder' | translate">
+              <i class="fa-regular fa-eye suffix"></i>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label><span>*</span> {{ 'settings.changePassword.confirmPassword' | translate }}</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock prefix"></i>
+              <input type="password" formControlName="ConfirmPassword"
+                     [placeholder]="'settings.changePassword.confirmPasswordPlaceholder' | translate">
+              <i class="fa-regular fa-eye suffix"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" [disabled]="changePassForm.invalid" class="update-btn">
+            <i class="fa-solid fa-check"></i>
+            {{ 'settings.changePassword.updateButton' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="settings-card danger-zone">
+    <div class="card-header">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>{{ 'settings.dangerZone.title' | translate }}</span>
+    </div>
+
+    <div class="card-body">
+
+      <div class="warning-alert">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <div class="alert-content">
+          <strong>{{ 'settings.dangerZone.deleteAccount.title' | translate }}</strong>
+          <p>{{ 'settings.dangerZone.deleteAccount.warning' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="delete-action-block">
+        <div class="text">
+          <h3>{{ 'settings.dangerZone.deleteAccount.heading' | translate }}</h3>
+          <p>{{ 'settings.dangerZone.deleteAccount.description' | translate }}</p>
+        </div>
+
+        <button class="delete-btn" (click)="deleteAccount()">
+          <i class="fa-regular fa-trash-can"></i>
+          {{ 'settings.dangerZone.deleteAccount.button' | translate }}
+        </button>
+      </div>
+
+    </div>
+  </section>
+</div>
+}

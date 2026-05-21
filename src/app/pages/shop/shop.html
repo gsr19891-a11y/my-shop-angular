@@ -1,0 +1,185 @@
+@if(langService.isLoaded()){
+  
+
+<main class="shop">
+  <div class="shop-page">
+    <section class="shop-section-header">
+      <div class="max-width">
+        <div class="header-text">
+          <h1>{{ 'shop.header.title' | translate }}</h1>
+          <p>{{ 'shop.header.subtitle' | translate }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop-main-section" [class.open]="isMenuOpen">
+      <div class="filters-block">
+        <div class="categories-block">
+          <h4>{{ 'shop.filters.categories' | translate }}</h4>
+          <form [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
+            @for (product of categories()?.data; track product.id) {
+              <div class="cat-name">
+                <label class="radio-container">
+                  <input type="radio" formControlName="categoryId" [value]="product.id" />
+                  <span>{{ product.name }}</span>
+                  <span class="cat-count">{{ product.productCount }}</span>
+                </label>
+              </div>
+            }
+          </form>
+        </div>
+
+        <form [formGroup]="filterForm">
+          <div class="rating-filter">
+            <p>{{ 'shop.filters.rating.title' | translate }}</p>
+            @for (rating of [5, 4, 3, 2, 1]; track rating) {
+              <label>
+                <input type="radio" formControlName="minRating" [value]="rating" />
+                <span>{{ rating }} {{ 'shop.filters.rating.up' | translate }}</span>
+              </label>
+            }
+          </div>
+        </form>
+
+        <div class="price-range">
+          <h4>{{ 'shop.filters.price.title' | translate }}</h4>
+          <form class="price-form" [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
+            <div>
+              <label>{{ 'shop.filters.price.min' | translate }}</label>
+              <input type="number" placeholder="$0" formControlName="minPrice" />
+            </div>
+            <p>-</p>
+            <div>
+              <label>{{ 'shop.filters.price.max' | translate }}</label>
+              <input type="number" placeholder="$9999" formControlName="maxPrice" />
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <h4>{{ 'shop.filters.availability.title' | translate }}</h4>
+          <form [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
+            <input type="checkbox" formControlName="inStock" id="inStock" />
+            <label for="inStock">{{ 'shop.filters.availability.inStock' | translate }}</label>
+          </form>
+        </div>
+
+        <form [formGroup]="filterForm">
+          <button class="submit-btn" type="submit">
+            {{ 'shop.filters.buttons.apply' | translate }}
+          </button>
+          <button class="clear-btn" type="reset">
+            {{ 'shop.filters.buttons.clear' | translate }}
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="shop-toolbar" [formGroup]="categoryForm">
+      <button class="open-filter" (click)="toggleMenu()">
+        <i class="fa-solid fa-grip"></i>{{ 'shop.toolbar.filters' | translate }}
+      </button>
+
+      <div class="search-wrapper">
+        <i class="icon-search"></i>
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+          <input
+            type="search"
+            formControlName="search"
+            [placeholder]="'shop.toolbar.searchPlaceholder' | translate"
+          />
+        </form>
+      </div>
+
+      <form class="toolbar-right" [formGroup]="filterSort" (change)="onSort()">
+        <div class="sort-wrapper">
+          <select formControlName="sort">
+            <option value="">{{ 'shop.toolbar.sort.default' | translate }}</option>
+            <option value="price-asc">{{ 'shop.toolbar.sort.priceLowHigh' | translate }}</option>
+            <option value="price-desc">{{ 'shop.toolbar.sort.priceHighLow' | translate }}</option>
+            <option value="name">{{ 'shop.toolbar.sort.name' | translate }}</option>
+            <option value="newest">{{ 'shop.toolbar.sort.newest' | translate }}</option>
+            <option value="rating">{{ 'shop.toolbar.sort.rating' | translate }}</option>
+          </select>
+        </div>
+        <button type="submit" class="sort-btn">
+          {{ 'shop.toolbar.sortButton' | translate }}
+        </button>
+      </form>
+    </section>
+
+    <section class="shop-product-block">
+      <section class="featured-section product-block">
+        <div class="max-width-second">
+          <div>
+            <div class="featured-section-cards">
+              @if (!searchProducts) {
+                @for (item of products()?.data?.items; track item.id) {
+                  <app-app-product-card [product]="item"></app-app-product-card>
+                }
+              } @else {
+                @for (item of searchProducts.data.items; track item.id) {
+                  <app-app-product-card [product]="item"></app-app-product-card>
+                } @empty {
+                  <div class="no-results">
+                    <div class="no-results-icon">
+                      <i class="icon-search-empty"></i>
+                    </div>
+                    <h2>{{ 'shop.products.noResults.title' | translate }}</h2>
+                    <p>{{ 'shop.products.noResults.description' | translate }}</p>
+                    <button class="clear-filters-btn" (click)="searchProducts = undefined">
+                      {{ 'shop.products.noResults.clear' | translate }}
+                    </button>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="pages-div" [formGroup]="filterForm">
+      <select formControlName="pageSize">
+        <option [value]="8">8/{{ 'shop.pagination.perPage' | translate }}</option>
+        <option [value]="12">12/{{ 'shop.pagination.perPage' | translate }}</option>
+        <option [value]="24">24/{{ 'shop.pagination.perPage' | translate }}</option>
+        <option [value]="48">48/{{ 'shop.pagination.perPage' | translate }}</option>
+      </select>
+
+      <section class="pagination-section">
+  <div class="pagination-container">
+   
+    <button
+      class="left-arrow"
+      (click)="setPage(filterForm.value.page - 1)"
+      [disabled]="filterForm.value.page === 1"
+    >
+      <
+    </button>
+
+    @for (p of pagesArray(); track p) {
+      <button
+        class="page-btn"
+        (click)="setPage(p)"
+        [class.active]="filterForm.value.page === p"
+      >
+        {{ p }}
+      </button>
+    }
+
+
+    <button 
+      class="rigth-arrow"
+      (click)="setPage(filterForm.value.page + 1)"
+      [disabled]="filterForm.value.page >= totalPages()"
+    >
+      >
+    </button>
+  </div>
+</section>
+    </section>
+  </div>
+</main>
+
+}

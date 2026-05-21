@@ -1,0 +1,97 @@
+@if(langService.isLoaded()){
+@if(productId) {
+  @let item = productId.data;
+
+  <section class="product-page">
+    <div class="product-container">
+
+      <i class="fa-solid fa-arrow-left back-icon" routerLink="/"></i>
+      
+      <div class="gallery-section">
+        <div class="main-image-container">
+          <img [src]="selectedImage || item.imageUrl" [alt]="item.name" class="main-display-img">
+        </div>
+
+        <div class="thumbnails">
+          @for (img of item.imageUrls; track $index) {
+            <div class="thumb-wrapper" 
+                 [class.active]="selectedImage === img"
+                 (click)="selectImage(img)">
+              <img [src]="img" class="thumb-img" />
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="info-section">
+        <nav class="breadcrumb">
+          <span>{{item.category.name}}</span> • <span>{{item.brand}}</span>
+        </nav>
+        
+        <h1 class="product-title">{{item.name}}</h1>
+        
+        <div class="rating-container">
+          <div class="stars">
+            @for (starClass of getStars(item.rating); track $index) {
+              <i [className]="starClass"></i>
+            }
+          </div>
+          <span class="rating-value">({{ item?.rating?.toFixed(1) }})</span>
+        </div>
+
+        <div class="price-tag">
+          USD {{item.price}}
+        </div>
+
+        @if(item.stock <= 0){
+          <div class="out-of-stock">
+            <span class="check-icon"><i class="fa-solid fa-x"></i></span>
+            {{ 'productCart.outOfStock' | translate }} ({{item.stock}} {{ 'productCart.available' | translate }})
+          </div>
+        } @else {
+          <div class="stock-status">
+            <span class="check-icon">✔</span>
+            {{ 'productCart.inStock' | translate }} ({{item.stock}} {{ 'productCart.available' | translate }})
+          </div>
+        }
+
+        <p class="short-description">
+          {{item.description}}
+        </p>
+
+        <div class="purchase-controls">
+          <div class="quantity-selector">
+            <button (click)="quantityDec()" [disabled]="currentQuantity === 1">-</button>
+            <input type="number" [(ngModel)]="currentQuantity" class="no-spinners" [disabled]="productId.data.stock <=0">
+            <button (click)="quantityInc()" [disabled]="productId.data.stock <=0">+</button>
+          </div>
+
+          <button class="add-to-cart-btn"
+                  (click)="addToCart(item.id); $event.stopPropagation()"
+                  [disabled]="productId.data.stock <=0">
+            <i class="fa-solid fa-cart-shopping"></i>
+            {{ 'productCart.addToCart' | translate }}
+          </button>
+
+          <button class="wishlist-btn" 
+                  (click)="toggleFavorite(item.id)" 
+                  [class.is-favorite]="isProductFavorite(item.id)">
+            <i [class]="isProductFavorite(item.id) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details-tabs">
+      <a routerLink="description" routerLinkActive="active">
+        {{ 'productCart.tabs.description' | translate }}
+      </a>
+      <a routerLink="reviews" routerLinkActive="active">
+        {{ 'productCart.tabs.reviews' | translate }} ({{ reviewsData?.data?.totalCount || 0 }})
+      </a>
+    </div>
+
+    <router-outlet></router-outlet>
+  </section>
+}
+}

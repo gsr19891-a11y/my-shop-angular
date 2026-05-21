@@ -1,0 +1,74 @@
+@if(langService.isLoaded()){
+<div class="favorite-cart-wrapper">
+  <section class="container">
+    <header class="cart-header">
+      <h1>{{ 'profile.title' | translate }}</h1>
+      <p>{{ 'profile.subtitle' | translate }}</p>
+    </header>
+
+    <div class="profile-image">
+        <div class="profile-image-header">
+            <i class="fa-regular fa-image"></i>
+            <p>{{ 'profile.picture.title' | translate }}</p>
+        </div>
+
+        <div class="profile-image-body">
+            <div class="profile-image-container">
+                @if(user?.data?.details?.pictureUrl) {
+                    <img [src]="user?.data?.details?.pictureUrl" alt="Profile Picture">
+                }@else {
+                    <p>{{(user?.data?.firstName)?.slice(0,1)}} {{(user?.data?.lastName)?.slice(0,1)}} </p>
+                }
+            </div>
+
+           <div class="upload-img">
+              <h3>{{ 'profile.upload.title' | translate }}</h3>
+              <p>{{ 'profile.upload.subtitle' | translate }}</p>
+    
+              <form [formGroup]="imageForm" (ngSubmit)="uploadImage()">
+                  <div class="input-wrapper">
+                      <i class="fa-solid fa-link"></i>
+                      <input type="text" formControlName="pictureUrl"
+                             [placeholder]="'profile.upload.urlPlaceholder' | translate">
+                  </div>
+
+                  <div>
+                      <input type="text" formControlName="firstName"
+                             [placeholder]="'profile.form.firstName' | translate">
+
+                      <input type="text" formControlName="lastName"
+                             [placeholder]="'profile.form.lastName' | translate">
+
+                      <input type="email" formControlName="email"
+                             [placeholder]="'profile.form.email' | translate"
+                             readonly [value]="user?.data?.email">
+
+                      <input type="text" formControlName="phoneNumber"
+                             [placeholder]="'profile.form.phone' | translate">
+
+                      <input type="text" formControlName="address"
+                             [placeholder]="'profile.form.address' | translate">
+
+                      <input type="date" formControlName="dateOfBirth"
+                             [placeholder]="'profile.form.birthDate' | translate">
+                  </div>
+
+                  <button type="submit" [disabled]="imageForm.invalid" class="save-btn">
+                      {{ 'profile.form.save' | translate }}
+                  </button>
+              </form>
+          </div>
+
+          <div class="avatar-preview">
+              @if (user?.data?.details?.pictureUrl) {
+                  <img [src]="user?.data?.details?.pictureUrl" alt="Avatar">
+              } @else {
+                  <div class="initials">{{ user?.data?.firstName }}{{ user?.data?.lastName }}</div>
+              }
+          </div>
+
+        </div>
+    </div>
+  </section>
+</div>
+}

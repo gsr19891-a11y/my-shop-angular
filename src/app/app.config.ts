@@ -2,10 +2,18 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { IMAGE_CONFIG } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
+    provideRouter(routes),
+    {
+      provide: IMAGE_CONFIG,
+      useValue: {
+        disableImageSizeWarning: true, 
+        disableImageLazyLoadingWarning: true 
+      }
+    }
   ]
 };

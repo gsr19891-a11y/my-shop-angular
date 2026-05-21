@@ -1,0 +1,89 @@
+<div class="reviews-summary">
+  <div class="rating-huge">
+    <div class="score">{{ averageRating }}</div>
+    <div class="stars">
+    </div>
+    <p>Based on {{ reviewsData?.data?.totalCount || 0 }} reviews</p>
+  </div>
+
+  <div class="rating-bars">
+    @for (star of [5, 4, 3, 2, 1]; track star) {
+      <div class="bar-row">
+        <span>{{ star }} ★</span>
+        <div class="bar">
+          <div class="fill" [style.width.%]="getPercent(stats[star])"></div>
+        </div>
+        <span>{{ stats[star] }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="action-btn">
+    @if (isLoggedIn) {
+      <button (click)="toggleModal()" class="write-review-btn">
+        <i class="fa-regular fa-edit"></i> Write a Review
+      </button>
+    }
+  </div>
+</div>
+
+<div class="reviews-list">
+  @for (review of reviewsData?.data?.items; track review.id) {
+    <div class="review-card">
+      <div class="review-author-info">
+        <div class="user-avatar">{{ review.user.firstName[0] }}</div>
+        <div class="text-info">
+          <h4 class="author-name">{{ review.user.firstName }} {{ review.user.lastName }}</h4>
+          <span class="review-date">{{ review.createdAt | date:'MMMM d, yyyy' }}</span>
+        </div>
+      </div>
+      <div class="review-stars-right">
+        @for (star of [1, 2, 3, 4, 5]; track star) {
+          <span class="star" [class.filled]="star <= review.rating">★</span>
+        }
+      </div>
+
+    </div>
+  }
+</div>
+
+@if (isModalOpen) {
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- Заголовок меняется в зависимости от режима -->
+        <h3>{{ editingReviewId ? 'Edit Your Review' : 'Write a Review' }}</h3>
+        <button class="close-btn" (click)="toggleModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <label><span class="required">*</span> Rating</label>
+        <div class="star-rating">
+          @for (star of [1,2,3,4,5]; track star) {
+            <span class="star" 
+                  [class.filled]="star <= selectedRate" 
+                  (click)="setRate(star)">★</span>
+          }
+        </div>
+      </div>
+
+      <div class="modal-footer">
+     
+        @if (editingReviewId) {
+          <button class="delete-modal-btn" (click)='deleteFromModal()' 
+                  style="background: #ff4d4d; color: white; margin-right: auto;">
+            Delete
+          </button>
+        }
+
+        <button class="cancel-btn" (click)="toggleModal()">Cancel</button>
+        
+        <button class="submit-btn" 
+                [disabled]="selectedRate === 0" 
+                (click)="submitReview()">
+          {{ editingReviewId ? 'Update' : 'Submit' }} Review
+        </button>
+      </div>
+    </div>
+  </div>
+}
