@@ -18,13 +18,12 @@ import { TranslatePipe } from '../../pipes/translate-pipe';
 })
 export class AppProductCard {
   allCategory!: Category | null;
-    langService = inject(LangService)
+  langService = inject(LangService)
 
   favoriteIds: number[] = [];
 
   constructor( 
     private router: Router, 
-    private categoryService:CategoriesService,
     private authService:AuthService,
     private change : ChangeDetectorRef,
   private productService:ProductService){}
@@ -52,30 +51,18 @@ ngOnInit() {
     return this.productService.addToCart(body).subscribe({
       next: (res) => {
         console.log('product added',res);
+        alert('Product added to cart!');
         this.productService.allCart().subscribe();
         this.change.detectChanges();
       },error(err) {
+        if(err.status === 401){
+          alert('You are not logged in!');
+        }
         console.error(err);
       },
     });
   }
 
-// loadFavorites() {
-//   const token = this.authService.getToken();
-//   if (!token) return;
-
-//   this.productService.getFavorites().subscribe({
-//     next: (res: any) => {
-//       this.favoriteIds = res?.data?.items?.map((item: any) => item.id) || [];
-//       this.change.detectChanges();
-//     },
-//     error: (err) => {
-//       if (err.status === 429) {
-//         console.error('Too many requests! Wait a moment.');
-//       }
-//     }
-//   });
-// }
 
 removeFromFavorites(id: number) {
   this.productService.deleteFromFavorites(id).subscribe({
@@ -114,24 +101,29 @@ getStars(rating: number): string[] {
 addFavorites(id: number) {
   
   const token = this.authService.getToken();
-  if (!token) return;
+  if (!token) {
+    alert('Please log in to add favorites.');
+    return;
+  }
 
 
   if (this.favoriteIds.includes(id)) {
-    console.warn('Product already in favorites');
+    alert('Product already in favorites');
     return;
   }
 
   this.productService.addToFavorites(id).subscribe({
+   
     next: () => {
-
       this.favoriteIds.push(id);
-
       this.productService.favoriteCount.update(count => count + 1);
       
       this.change.detectChanges();
     },
     error: (err) => {
+      if(err.status === 401){
+          alert('You are not logged in!');
+        }
       console.error('Error adding to favorites', err);
 
     }
@@ -142,6 +134,7 @@ addFavorites(id: number) {
 toggleFavorite(id: number) {
   if (this.isProductFavorite(id)) {
     this.removeFromFavorites(id);
+    this.productService.favoriteCount.update(count => count - 1);
   } else {
     this.addFavorites(id);
   }

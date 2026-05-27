@@ -41,10 +41,12 @@ changePassForm!:FormGroup;
     }
     this.authService.changePassword(this.changePassForm.value).subscribe({
       next: (res)=>{
+         alert('Password updated successfully!');
         console.log(res);
       },
       error(err) {
         console.error(err);
+        alert('Error updating password. Please try again.');
       },
     })
   }

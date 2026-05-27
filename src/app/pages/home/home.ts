@@ -10,6 +10,7 @@ import { AppProductCard } from "../app-product-card/app-product-card";
 import { BehaviorSubject } from 'rxjs';
 import { TranslatePipe} from '../../pipes/translate-pipe';
 import { LangService } from '../../services/lang-service';
+import { createChat } from '@n8n/chat';
 
 
 
@@ -44,9 +45,6 @@ isLoggedIn$ = this.loggedIn.asObservable();
 
   }
 
-
-
-
 goToDetails(item: any) {
   this.router.navigate(['/product-info', item.id], {
     queryParams: {
@@ -78,6 +76,12 @@ updateAuthStatus() {
 logout() {
   localStorage.removeItem('userToken');
   this.updateAuthStatus();
+}
+
+ngOnInit() {
+  createChat({
+    webhookUrl: 'http://localhost:5678/webhook/ff330712-174f-4789-ad6b-a9320ccb3005/chat'
+  })
 }
 
 }

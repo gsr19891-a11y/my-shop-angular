@@ -309,6 +309,34 @@ export class ProductService {
   }
 
   favoriteCount = signal<number>(0);
-
   cartCount = signal<number>(0);
+
+  n8nwebhook(text: string, email: string) {
+    return this.http.post<any>('http://localhost:5678/webhook-test/chat-bot', {
+      userText: text,
+      userEmail: email,
+      productUrl: this.apiService.allProductsUrl,
+      apiKey: this.apiService.XAPIKEY(),
+      catgeories: this.apiService.categoriesUrl,
+    });
+  }
+
+
+
+
+
+  userComments(form: any) {
+    return this.http.post('http://localhost:5678/webhook-test/user-comment', form)
+  }
+
+
+
+
+
+
+
+
+
+
+
 }

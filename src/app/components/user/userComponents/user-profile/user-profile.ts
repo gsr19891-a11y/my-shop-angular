@@ -103,6 +103,7 @@ uploadImage() {
   this.authService.updateProfile(updateForm).subscribe({
     next: (res: any) => {
       console.log('Profile updated!', res);
+      alert('Profile updated successfully!');
       if (this.user?.data?.details) {
         this.user.data.details.pictureUrl = rawValues.pictureUrl;
       }

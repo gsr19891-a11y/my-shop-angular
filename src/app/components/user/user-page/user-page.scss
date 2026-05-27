@@ -54,8 +54,8 @@
         font-weight: 600;
         color: white;
         margin-bottom: 10px;
-      } //user-icon
-    } //user-card-header
+      }
+    }
 
     $green-primary: #27ae60;
     $green-light: #eafaf1;
@@ -78,27 +78,27 @@
         margin-bottom: 20px;
       }
 
-
-      .card-ul,
-      .logout-ul {
+      .card-ul {
         display: flex;
         align-items: center;
         gap: 15px;
         padding: 10px;
         text-decoration: none;
         border-radius: 12px;
-        transition: all 0.3s ease-in-out;
+        transition: $transition;
         cursor: pointer;
+        width: 100%;
+        box-sizing: border-box;
 
         p {
           margin: 0;
           font-weight: 500;
           font-size: 16px;
           color: $text-dark;
+          transition: $transition;
         }
 
-        .card-icon,
-        .logout-icon {
+        .card-icon {
           width: 40px;
           height: 40px;
           display: flex;
@@ -107,7 +107,7 @@
           border-radius: 10px;
           background-color: #dbdbdb;
           font-size: 18px;
-          transition: all 0.3s ease-in-out;
+          transition: $transition;
           color: #585858;
         }
 
@@ -119,18 +119,18 @@
             background-color: #1db95442;
           }
         }
-      }
 
-      .card-ul.active {
-        background: $green-light;
+        &.active-link {
+          background-color: $green-light !important;
 
-        p {
-          color: $green-primary;
-        }
+          p {
+            color: $green-primary !important;
+          }
 
-        .card-icon {
-          background: $green-primary;
-          color: #fff;
+          .card-icon {
+            background-color: $green-primary !important;
+            color: #fff !important;
+          }
         }
       }
 
@@ -140,13 +140,35 @@
         margin-top: 10px;
 
         .logout-ul {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding: 10px;
+          text-decoration: none;
+          border-radius: 12px;
+          transition: $transition;
+          cursor: pointer;
+          width: 100%;
+          box-sizing: border-box;
+
           p {
+            margin: 0;
+            font-weight: 500;
+            font-size: 16px;
             color: $red-primary;
           }
 
           .logout-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
             background: $red-light;
             color: $red-primary;
+            font-size: 18px;
+            transition: $transition;
           }
 
           &:hover {
@@ -155,13 +177,13 @@
         }
       }
     }
-  } //user-navigation
+  }
 
   .user-content {
-    grid-area: 'user-content';
+    grid-area: user-content;
     width: 100%;
-  } //user-content
-} //user-page
+  }
+}
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .user-page {
@@ -176,11 +198,14 @@
     gap: 20px;
     padding: 20px;
 
-    .card-ul{
-    width: 100%;
+    .card-ul {
+      width: 100%;
     }
+
     .user-card-nav {
+      width: 100% !important;
       display: flex;
+      flex-direction: column;
 
       .logout-btn {
         border: 0 !important;
@@ -190,7 +215,6 @@
     }
 
     nav {
-      
       display: flex;
       padding: 0 !important;
       margin: 0 !important;
@@ -203,14 +227,13 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-
-  .user-navigation{
-  width: 100% !important;
-  padding: 0px !important;
-  margin: 0px !important;
-
+  .user-navigation {
+    width: 100% !important;
+    padding: 0px !important;
+    margin: 0px !important;
   }
-.user-page {
+
+  .user-page {
     width: 100%;
     height: 100% !important;
     margin: 0 auto;
@@ -222,14 +245,15 @@
     gap: 5px;
     padding: 5px;
 
-    .card-icon{
-    width: 30px !important;
-    height: 30px !important;
+    .card-icon {
+      width: 30px !important;
+      height: 30px !important;
     }
 
-    p{
-    font-size: 12px !important;
+    p {
+      font-size: 12px !important;
     }
+
     .user-card-header {
       padding: 10px !important;
       h2 {
@@ -237,24 +261,17 @@
       }
     }
 
-    .user-card-header {
-      h2 {
-        font-size: 18px !important;
-      }
+    .logout-ul {
+      padding: 0 !important;
     }
 
-    .logout-ul{
-    padding: 0 !important;
-    }
-
-
-    .card-ul{
-    width: 100%;
-    padding: 0px !important;
-    }
-    .user-card-nav {
+    .card-ul {
       width: 100%;
+      padding: 0px !important;
+    }
 
+    .user-card-nav {
+      width: 100% !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -268,7 +285,6 @@
     }
 
     nav {
-      
       display: grid !important;
       padding: 0 !important;
       margin: 0 !important;

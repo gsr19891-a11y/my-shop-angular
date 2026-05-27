@@ -179,7 +179,50 @@
   </div>
 </section>
     </section>
+
+   <span class="bot-icon">
+      <a  title="Chat Bot" class="bot" (click)="toggleChat()">
+        <i class="fa-solid fa-robot"></i>
+      </a>
+    </span>
+
+    @if(chatVsilible()){
+    <section class="chat-bot-section" cdkDrag>
+      <h3>Hello it's a personal bot</h3>
+      <form [formGroup]="chatForm" (ngSubmit)="onChatSubmit()" class="bot-form">
+        <div class="email-input">
+          <label for="email">add your email</label>
+          <input type="email" id="email" formControlName="email" placeholder="yourmail@gmail.com">
+        </div>
+        
+        <p>You can ask any question</p>
+        <textarea formControlName="text" placeholder="Question..."></textarea>
+        <button type="submit" (click)="viewMessage()">Send Message</button>
+      </form>
+
+<div class="bot-response">
+  @if (n8nResponse()?.botResponse) {
+    <div class="bot-response-scroll">
+      <div [innerHTML]="n8nResponse().botResponse"></div>
+    </div>
+  }@else {
+  
+
+  <div class="no-text">
+      
+    <i class="fa-solid fa-circle-notch loading" ></i>
+    
   </div>
+  }
+
+</div>
+
+
+    </section>
+  }
+
+  </div>
+
 </main>
 
 }

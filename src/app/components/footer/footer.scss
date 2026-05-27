@@ -1,9 +1,171 @@
-footer{
-background-color: black;
-color: #1db954;
-font-weight: 200;
-text-decoration: underline;
-padding: 10px;
-text-align: center;
-z-index: 999;
+footer {
+  background-color: black;
+  color: #1db954;
+  font-weight: 200;
+  text-decoration: underline;
+  padding: 10px;
+  text-align: center;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  position: relative;
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #1db954;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        scale: 1.1;
+      }
+    }
+  }
+
+
+$color-bg-main: #f8fafc; 
+$color-card-bg: #ffffff;
+$color-border: #e2e8f0;
+$color-text-main: #4a5568;
+$color-text-muted: #718096;
+$color-required: #ff6b57;
+$color-button:#1db954 ;
+$color-button-hover: #fa5741;
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px; 
+  background-color: $color-card-bg;
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid $color-border;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: move;
+  user-select: none;
+  height: max-content;
+  margin-left: calc(500px / -2); 
+  margin-top: -470px;
+  position: fixed;
+  top: 60%;
+  left: 30%;
+
+  .fa-star{
+  color: gold !important;
+  }
+
+  h2 {
+    text-align: center;
+    color: $color-text-main;
+    font-size: 28px;
+    font-weight: 400;
+    margin: 0 0 8px 0;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: $color-text-muted;
+    font-size: 15px;
+    margin: 0 0 24px 0;
+  }
+
+  .name-div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+
+    label {
+      font-size: 16px;
+      color: $color-text-main;
+      margin-bottom: 8px;
+      font-weight: 500;
+      
+    
+      .required {
+        color: $color-required;
+        margin-left: 2px;
+      }
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid $color-border;
+      border-radius: 6px;
+      font-size: 15px;
+      color: $color-text-main;
+      background-color: #fff;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s;
+
+      &::placeholder {
+        color: #cbd5e1;
+      }
+
+      &:focus {
+        border-color: darken($color-border, 20%);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    select {
+      appearance: none; 
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+  }
+
+.submit-btn,
+  .close-btn {
+    width: 100%;
+    background-color: $color-button;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color:#1db954ad
+    }
+  }
+    .close-btn{
+    background-color: #ff6b57;
+    &:hover {
+      background-color:#ff6b57c0;
+    }
+
+}
+  
+}
 }

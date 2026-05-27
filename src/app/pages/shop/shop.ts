@@ -6,24 +6,26 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { ProductService } from '../../services/product-service';
 import { ProductResponse } from '../../interface/product-response';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, Subscription } from 'rxjs';
 import { AppProductCard } from '../app-product-card/app-product-card';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
 import { LangService } from '../../services/lang-service';
 import { TranslatePipe } from '../../pipes/translate-pipe';
+import { DomSanitizer } from '@angular/platform-browser';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-shop',
-  imports: [ReactiveFormsModule, AppProductCard,TranslatePipe],
+  imports: [ReactiveFormsModule, AppProductCard, TranslatePipe,DragDropModule],
   templateUrl: './shop.html',
   styleUrls: ['./shop.scss'],
 })
 export class Shop {
-filterSort!: FormGroup;
-sort!: any;
+  filterSort!: FormGroup;
+  sort!: any;
 
- langService = inject(LangService)
+  langService = inject(LangService);
 
   favoriteIds: number[] = [];
   currentFilter: any = {
@@ -36,6 +38,7 @@ sort!: any;
     Take: 8,
   };
 
+  private sanitizer = inject(DomSanitizer);
   private fb = inject(FormBuilder);
   categories!: Signal<CategoriesInterface | null>;
   products = signal<ProductResponse | null>(null);
@@ -44,6 +47,10 @@ sort!: any;
 
   filterForm!: FormGroup;
   filterProducts?: ProductResponse;
+
+  chatForm!: FormGroup;
+  sub!: Subscription;
+  n8nResponse = signal<any>(null);
 
   constructor(
     public categoriesService: CategoriesService,
@@ -57,7 +64,6 @@ sort!: any;
     this.categories = toSignal(categoriesService.getCategories(), {
       initialValue: null,
     });
-
   }
 
   categoryForm = this.fb.group({
@@ -73,8 +79,6 @@ sort!: any;
     this.searchForm = this.fb.group({
       search: [''],
     });
-
-
 
     this.searchForm
       .get('search')
@@ -146,26 +150,30 @@ sort!: any;
 
     this.loadFavorites();
 
-
-     this.filterSort = this.fb.group({
+    this.filterSort = this.fb.group({
       sort: [''],
-      sortDescending: [false]
+      sortDescending: [false],
+    });
+
+    this.routes.queryParams.subscribe((params) => {
+      const sort = params['sort'];
+
+      if (sort) {
+        this.filterSort.patchValue({ sort });
+        this.onSort();
+      }
+    });
+
+    this.chatForm = this.fb.group({
+      text: [''],
+      email: [''],
     })
 
-      this.routes.queryParams.subscribe(params => {
 
-  const sort = params['sort'];
-
-  if (sort) {
-    this.filterSort.patchValue({ sort });
-    this.onSort();
-  }
-
-});
 
   }
 
-totalProducts = signal(0);
+  totalProducts = signal(0);
 
   setPage(pageNumber: number) {
     if (pageNumber < 1) return;
@@ -187,68 +195,60 @@ totalProducts = signal(0);
     });
   }
 
-onFilterSubmit() {
-  const filters = this.filterForm.value;
-  const minR = filters.minRating || 0;
+  onFilterSubmit() {
+    const filters = this.filterForm.value;
+    const minR = filters.minRating || 0;
 
-  let sortField = '';
-  let isDescending = false;
+    let sortField = '';
+    let isDescending = false;
 
-  if (filters.sortBy === 'price-low') {
-    sortField = 'price';
-    isDescending = false;
-  } else if (filters.sortBy === 'price-high') {
-    sortField = 'price';
-    isDescending = true;
-  }
-
-  const apiParams = {
-    ...filters,
-    Take: filters.pageSize,
-    Page: filters.page,
-    SortBy: sortField,
-    SortDescending: isDescending,
-  };
-
-
-  this.productService.filterProducts(apiParams).subscribe((res: any) => {
-    let rawItems: any[] = [];
-
-    if (Array.isArray(res)) {
-      rawItems = res;
-    } else if (res?.data?.items) {
-      rawItems = res.data.items;
+    if (filters.sortBy === 'price-low') {
+      sortField = 'price';
+      isDescending = false;
+    } else if (filters.sortBy === 'price-high') {
+      sortField = 'price';
+      isDescending = true;
     }
 
-    const cleanItems = rawItems.filter((p) => p.rating >= minR);
+    const apiParams = {
+      ...filters,
+      Take: filters.pageSize,
+      Page: filters.page,
+      SortBy: sortField,
+      SortDescending: isDescending,
+    };
 
-    this.products.set({
-      data: { items: cleanItems }
-    } as ProductResponse);
+    this.productService.filterProducts(apiParams).subscribe((res: any) => {
+      let rawItems: any[] = [];
 
+      if (Array.isArray(res)) {
+        rawItems = res;
+      } else if (res?.data?.items) {
+        rawItems = res.data.items;
+      }
 
-    this.totalProducts.set(res?.data?.totalCount || 0);
-    
- 
-    this.change.detectChanges();
+      const cleanItems = rawItems.filter((p) => p.rating >= minR);
+
+      this.products.set({
+        data: { items: cleanItems },
+      } as ProductResponse);
+
+      this.totalProducts.set(res?.data?.totalCount || 0);
+
+      this.change.detectChanges();
+    });
+  }
+
+  totalPages = computed(() => {
+    const total = this.totalProducts();
+    const pageSize = this.filterForm.get('pageSize')?.value || 8;
+    return Math.ceil(total / pageSize);
   });
-}
 
-
-totalPages = computed(() => {
-  const total = this.totalProducts();
-  const pageSize = this.filterForm.get('pageSize')?.value || 8;
-  return Math.ceil(total / pageSize);
-});
-
-
-pagesArray = computed(() => {
-  const count = this.totalPages();
-  return count > 0 ? Array.from({ length: count }, (_, i) => i + 1) : [];
-});
-
-
-
+  pagesArray = computed(() => {
+    const count = this.totalPages();
+    return count > 0 ? Array.from({ length: count }, (_, i) => i + 1) : [];
+  });
 
   goToDetails(item: any) {
     this.router.navigate(['/product-info', item.id], {
@@ -267,15 +267,14 @@ pagesArray = computed(() => {
     });
   }
 
-
- loadProducts() {
-  this.productService.filterProducts(this.currentFilter).subscribe({
-    next: (res: any) => {
-      this.products.set(res); 
-    },
-    error: (err) => console.error(err),
-  });
-}
+  loadProducts() {
+    this.productService.filterProducts(this.currentFilter).subscribe({
+      next: (res: any) => {
+        this.products.set(res);
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
   loadFavorites() {
     if (!this.authService.getToken()) {
@@ -303,6 +302,9 @@ pagesArray = computed(() => {
   }
 
   addFavorites(id: number) {
+    const token = this.authService.getToken();
+
+
     this.productService.addToFavorites(id).subscribe({
       next: (res) => {
         if (!this.favoriteIds.includes(id)) {
@@ -311,14 +313,16 @@ pagesArray = computed(() => {
 
         this.change.detectChanges();
 
-        console.log('Product added to UI state');
+        alert('Product added to UI state');
       },
       error: (err) => {
-        if (err.status === 400) {
+          if (err.status === 400) {
           this.removeFromFavorites(id);
+
         }
       },
     });
+    
   }
 
   isMenuOpen = false;
@@ -332,41 +336,81 @@ pagesArray = computed(() => {
     }
   }
 
+  onSort() {
+    const value = this.filterSort.value.sort;
 
-onSort() {
-  const value = this.filterSort.value.sort;
+    let field = '';
+    let isDesc = false;
 
-  let field = '';
-  let isDesc = false;
+    switch (value) {
+      case 'price-asc':
+        field = 'Price';
+        isDesc = false;
+        break;
+      case 'price-desc':
+        field = 'Price';
+        isDesc = true;
+        break;
+      case 'rating':
+        field = 'Rating';
+        isDesc = true;
+        break;
+      case 'name':
+        field = 'Name';
+        isDesc = false;
+        break;
+      case 'newest':
+        field = 'CreatedAt';
+        isDesc = true;
+        break;
+    }
 
-  switch (value) {
-    case 'price-asc':
-      field = 'Price';   
-      isDesc = false;
-      break;
-    case 'price-desc':
-      field = 'Price';
-      isDesc = true;
-      break;
-    case 'rating':
-      field = 'Rating';   
-      isDesc = true;
-      break;
-    case 'name':
-      field = 'Name';     
-      isDesc = false;
-      break;
-    case 'newest':
-      field = 'CreatedAt'; 
-      isDesc = true;
-      break;
+    this.productService.sortBy(field, isDesc).subscribe({
+      next: (res) => {
+        this.products.set(res);
+      },
+    });
   }
 
-  this.productService.sortBy(field, isDesc).subscribe({
-    next: (res) => {
-      this.products.set(res);
+  chatVsilible = signal(false);
+
+  toggleChat() {
+    if (this.chatVsilible() === false) {
+      this.chatVsilible.set(true);
+    } else if (this.chatVsilible() === true) {
+      this.chatVsilible.set(false);
     }
-  });
+    console.log(this.chatVsilible());
+  }
+
+onChatSubmit() {
+  if (this.chatForm.valid) {
+    this.sub = this.productService.n8nwebhook(this.chatForm.value.text, this.chatForm.value.email).subscribe({
+      next: (res) => {
+       
+        if (res && res.botResponse) {
+        
+          const trustedHtml = this.sanitizer.bypassSecurityTrustHtml(res.botResponse);
+          this.n8nResponse.set({ botResponse: trustedHtml });
+        } else {
+
+          const trustedHtml = this.sanitizer.bypassSecurityTrustHtml(res);
+          this.n8nResponse.set({ botResponse: trustedHtml });
+        }
+        console.log(this.n8nResponse());
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
 }
 
+viewMessage(){
+  return alert('თქვენი მესიჯი გაგზავნილია! დაელოდეთ პასუხს')
+
 }
+
+
+}
+

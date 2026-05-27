@@ -1,13 +1,13 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth-service';
-import { Router, RouterOutlet, RouterLinkWithHref } from "@angular/router";
+import { Router, RouterOutlet, RouterLinkWithHref, RouterLinkActive } from "@angular/router";
 import { UserInterface } from '../../../interface/authInterface/user-interface';
 import { LangService } from '../../../services/lang-service';
 import { TranslatePipe } from '../../../pipes/translate-pipe';
 
 @Component({
   selector: 'app-user-page',
-  imports: [RouterOutlet, RouterLinkWithHref, TranslatePipe],
+  imports: [RouterOutlet, RouterLinkWithHref, TranslatePipe,RouterLinkActive],
   templateUrl: './user-page.html',
   styleUrl: './user-page.scss',
 })
