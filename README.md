@@ -8,7 +8,7 @@ A web-based e-commerce project developed to demonstrate proficiency in Frontend 
 - **State Management:** Angular Signals
 - **API Communication:** HttpClient (RxJS)
 - **Styling:** SCSS
-- **Automation:** n8n (integration in progress)
+- **Automation:** n8n
 
 ## 🛠 Features
 - Dynamic product catalog with category filtering.
