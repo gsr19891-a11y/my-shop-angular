@@ -76,7 +76,25 @@ $bg-light: #f8f8f8;
   height: calc(100vh - 120px); 
   cursor: move;
 
+.close-btn{
+background-color: #00b343;
+color: white;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+position: absolute;
+top: 20px;
+right: 20px;
+box-shadow: #333 0px 0px 5px;
+transition: all 0.3s ease-in-out;
 
+&:hover{
+scale: 1.1;}
+}
 
   .no-text{
   width: 100%;

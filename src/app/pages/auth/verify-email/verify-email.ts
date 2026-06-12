@@ -31,11 +31,20 @@ export class VerifyEmail {
 
 
   verifyEmail(){
+    const userEmail = this.verifyEmailForm.value.email;
+    const userName = this.verifyEmailForm.value.firstName;
 
     this.authService.verifyEmail(this.verifyEmailForm.value).subscribe({
       next: (res)=>{
         console.log(res);
         localStorage.setItem('userToken', JSON.stringify(res));
+
+
+        this.authService.authEmailVerification(userEmail, userName).subscribe({
+          next: (res) => console.log('verification email sent:', userEmail),
+          error: (err) => console.error(err)
+        });
+
         this.router.navigate(['/']);
       },
       error(err) {

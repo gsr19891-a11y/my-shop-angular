@@ -187,7 +187,23 @@ deleteProfile(){
 }
 
 
+authEmailVerification(userEmail:string, userName: string){
+  return this.http.post('https://playable-moistness-spokesman.ngrok-free.dev/webhook-test/auth-verify',{
+    email: userEmail,
+    name: userName
+   },{
+  })
+}
 
+resetPasswordVerification(userName: string, userEMail: string) {
+  return this.http.post(
+    'http://localhost:5678/webhook-test/c6325561-15de-491c-97bd-e5564350f319',
+    {
+      email: userEMail,
+      name: userName
+    }
+  );
+}
 
 
 

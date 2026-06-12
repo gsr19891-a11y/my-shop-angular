@@ -33,6 +33,7 @@ export class ForgotPassword {
     this.authService.forgotPass(emailValue).subscribe({
       next: (res)=>{
         console.log(res);
+        alert('Password reset instructions have been sent to your email.');
       },
       error(err) {
         console.error(err);

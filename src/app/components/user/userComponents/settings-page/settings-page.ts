@@ -41,6 +41,17 @@ changePassForm!:FormGroup;
     }
     this.authService.changePassword(this.changePassForm.value).subscribe({
       next: (res)=>{
+        this.authService.getUser().subscribe({
+          next: (res:any)=>{
+            const userName = res.data.firstName;
+            const userEmail = res.data.email;
+            this.authService.resetPasswordVerification(userEmail, userName).subscribe({
+              next: (res) => console.log('verification email sent:', userEmail),
+              
+              error: (err) => console.error(err)
+            });
+          }
+        })
          alert('Password updated successfully!');
         console.log(res);
       },

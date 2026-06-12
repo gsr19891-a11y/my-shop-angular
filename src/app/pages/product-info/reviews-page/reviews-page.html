@@ -28,7 +28,8 @@
 </div>
 
 <div class="reviews-list">
-  @for (review of reviewsData?.data?.items; track review.id) {
+  @if(reviewsData && reviewsData.data){
+  @for (review of reviewsData.data.items; track review.id) {
     <div class="review-card">
       <div class="review-author-info">
         <div class="user-avatar">{{ review.user.firstName[0] }}</div>
@@ -45,13 +46,14 @@
 
     </div>
   }
+}
 </div>
 
 @if (isModalOpen) {
   <div class="modal-overlay">
     <div class="modal-content">
       <div class="modal-header">
-        <!-- Заголовок меняется в зависимости от режима -->
+  
         <h3>{{ editingReviewId ? 'Edit Your Review' : 'Write a Review' }}</h3>
         <button class="close-btn" (click)="toggleModal()">✕</button>
       </div>

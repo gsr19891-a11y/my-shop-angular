@@ -13,6 +13,8 @@ import { Subject, tap } from 'rxjs';
 })
 export class ProductService {
   allFavoritesCart = signal<any[]>([]);
+  userEmail = signal<string>('');
+  userName = signal<string>('');
 
   constructor(
     private http: HttpClient,
@@ -308,8 +310,11 @@ export class ProductService {
     });
   }
 
+  //webhook-responses===================================================================
+
   favoriteCount = signal<number>(0);
   cartCount = signal<number>(0);
+  
 
   n8nwebhook(text: string, email: string) {
     return this.http.post<any>('http://localhost:5678/webhook-test/chat-bot', {
@@ -322,16 +327,28 @@ export class ProductService {
   }
 
 
-
-
-
   userComments(form: any) {
     return this.http.post('http://localhost:5678/webhook-test/user-comment', form)
   }
 
+ 
 
 
+  emailSend(userEmail: string, userName: string) {
+    return this.http.post('http://localhost:5678/webhook-test/email-message', {
+      email: userEmail,
+      name: userName
+    })
+  }
 
+  sendReviewNotification(review: any, productName: string, userEmail?: string, userName?: string) {
+    return this.http.post('http://localhost:5678/webhook-test/review-notification',{
+      reviewId: review,
+      productName: productName,
+      userEmail: userEmail,
+      userName: userName
+    })
+  }
 
 
 

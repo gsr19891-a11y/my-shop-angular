@@ -33,7 +33,7 @@ register() {
 
     this.authService.registerPost(this.registerForm.value).subscribe({
       next: (response) => {
-        console.log('coreect registrer', response);
+        console.log('succsess registrer', response);
 this.router.navigate(['/auth/verify', email]);
       },
       error: (err) => {

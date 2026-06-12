@@ -35,11 +35,20 @@ export class Footer {
   }
 
   onSubmit(){
+
+    if(this.commentForm.value.age > 100 || this.commentForm.value.age < 9){
+      alert('Please enter a valid age between 9 and 100.');
+      return;
+    }
+
     if (this.commentForm.valid) {
       const formData = this.commentForm.value;
       this.productService.userComments(formData).subscribe({
         next: (response) => {
           console.log('Comment submitted successfully:', response);
+          alert('Comment submitted successfully!');
+          this.commentForm.reset();
+          this.toggle = false;
         }
       })
       console.log(formData);

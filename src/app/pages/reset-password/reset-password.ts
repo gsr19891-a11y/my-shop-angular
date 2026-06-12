@@ -12,8 +12,7 @@ export class ResetPassword {
   token: string | null = null;
 
   constructor(
-    private route: ActivatedRoute,
-    private authService: AuthService
+    private route: ActivatedRoute
   ){}
 
   ngOnInit(): void {
