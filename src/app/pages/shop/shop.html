@@ -111,18 +111,12 @@
           <div class="max-width-second">
             <div>
               <div class="featured-section-cards">
-                @if (searchProducts?.data?.items && searchProducts.data.items.length > 0) {
-                  @for (item of searchProducts.data.items; track item.id) {
-                    <app-app-product-card [product]="item"></app-app-product-card>
-                  }
-                } @else {
-                  @if (products()?.data?.items) {
-                    @for (item of products()?.data?.items ?? []; track item.id) {
+                @if (searchProducts?.data?.items; as sItems) {
+                  @if (sItems.length > 0) {
+                    @for (item of sItems; track item.id) {
                       <app-app-product-card [product]="item"></app-app-product-card>
                     }
-                  }
-
-                  @if (searchProducts?.data?.items && searchProducts.data.items.length === 0) {
+                  } @else if (sItems.length === 0) {
                     <div class="no-results">
                       <div class="no-results-icon">
                         <i class="icon-search-empty"></i>
@@ -135,6 +129,12 @@
                         {{ 'shop.products.noResults.clear' | translate }}
                       </button>
                     </div>
+                  }
+                } @else {
+                  @if (products()?.data?.items) {
+                    @for (item of products()?.data?.items ?? []; track item.id) {
+                      <app-app-product-card [product]="item"></app-app-product-card>
+                    }
                   }
                 }
               </div>
