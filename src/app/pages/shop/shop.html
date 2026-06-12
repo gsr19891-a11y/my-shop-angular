@@ -106,43 +106,43 @@
         </form>
       </section>
 
-   <section class="shop-product-block">
-  <section class="featured-section product-block">
-    <div class="max-width-second">
-      <div>
-        <div class="featured-section-cards">
-          
-          @if (searchProducts?.data?.items && searchProducts.data.items.length > 0) {
-            @for (item of searchProducts.data.items; track item.id) {
-              <app-app-product-card [product]="item"></app-app-product-card>
-            }
-          } 
-          @else {
-            @if (products()?.data?.items) {
-              @for (item of products()!.data!.items; track item.id) {
-                <app-app-product-card [product]="item"></app-app-product-card>
-              }
-            }
-            
-            @if (searchProducts && (!searchProducts.data.items || searchProducts.data.items.length === 0)) {
-              <div class="no-results">
-                <div class="no-results-icon">
-                  <i class="icon-search-empty"></i>
-                </div>
-                <h2>{{ 'shop.products.noResults.title' | translate }}</h2>
-                <p>{{ 'shop.products.noResults.description' | translate }}</p>
-                <button class="clear-filters-btn" (click)="searchProducts = undefined">
-                  {{ 'shop.products.noResults.clear' | translate }}
-                </button>
-              </div>
-            }
-          }
+      <section class="shop-product-block">
+        <section class="featured-section product-block">
+          <div class="max-width-second">
+            <div>
+              <div class="featured-section-cards">
+               @if (searchProducts && searchProducts.data.items.length > 0) {
 
-        </div>
-      </div>
-    </div>
-  </section>
-</section>
+                 @for (item of searchProducts.data.items; track item.id) {
+                    <app-app-product-card [product]="item"></app-app-product-card>
+                  }
+                } @else {
+                  @if (products()?.data?.items) {
+                    @for (item of products()?.data?.items ?? []; track item.id) {
+                      <app-app-product-card [product]="item"></app-app-product-card>
+                    }
+                  }
+
+                  @if (searchProducts && searchProducts.data.items.length === 0) {
+                    <div class="no-results">
+                      <div class="no-results-icon">
+                        <i class="icon-search-empty"></i>
+                      </div>
+
+                      <h2>{{ 'shop.products.noResults.title' | translate }}</h2>
+                      <p>{{ 'shop.products.noResults.description' | translate }}</p>
+
+                      <button class="clear-filters-btn" (click)="searchProducts = undefined">
+                        {{ 'shop.products.noResults.clear' | translate }}
+                      </button>
+                    </div>
+                  }
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
 
       <section class="pages-div" [formGroup]="filterForm">
         <select formControlName="pageSize">
