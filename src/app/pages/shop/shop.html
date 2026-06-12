@@ -111,9 +111,8 @@
           <div class="max-width-second">
             <div>
               <div class="featured-section-cards">
-               @if (searchProducts && searchProducts.data.items.length > 0) {
-
-                 @for (item of searchProducts.data.items; track item.id) {
+                @if (searchProducts?.data?.items && searchProducts.data.items.length > 0) {
+                  @for (item of searchProducts.data.items; track item.id) {
                     <app-app-product-card [product]="item"></app-app-product-card>
                   }
                 } @else {
@@ -123,7 +122,7 @@
                     }
                   }
 
-                  @if (searchProducts && searchProducts.data.items.length === 0) {
+                  @if (searchProducts?.data?.items && searchProducts.data.items.length === 0) {
                     <div class="no-results">
                       <div class="no-results-icon">
                         <i class="icon-search-empty"></i>
