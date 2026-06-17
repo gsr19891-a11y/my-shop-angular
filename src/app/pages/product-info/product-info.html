@@ -30,14 +30,14 @@
         
         <h1 class="product-title">{{item.name}}</h1>
         
-        <div class="rating-container">
-          <div class="stars">
-            @for (starClass of getStars(item.rating); track $index) {
-              <i [className]="starClass"></i>
-            }
-          </div>
-          <span class="rating-value">({{ item?.rating?.toFixed(1) }})</span>
-        </div>
+       <div class="rating-container">
+  <div class="stars">
+    @for (starClass of getStars(item.rating ?? 0); track $index) {
+      <i [className]="starClass"></i>
+    }
+  </div>
+  <span class="rating-value">({{ item.rating | number:'1.1-1' }})</span>
+</div>
 
         <div class="price-tag">
           USD {{item.price}}

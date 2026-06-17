@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth-service';
 import { LangService } from '../../services/lang-service';
 import { TranslatePipe } from '../../pipes/translate-pipe';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-app-product-card',
@@ -19,6 +21,7 @@ import { TranslatePipe } from '../../pipes/translate-pipe';
 export class AppProductCard {
   allCategory!: Category | null;
   langService = inject(LangService)
+  private toastr = inject(ToastrService)
 
   favoriteIds: number[] = [];
 
@@ -27,6 +30,16 @@ export class AppProductCard {
     private authService:AuthService,
     private change : ChangeDetectorRef,
   private productService:ProductService){}
+
+
+  showSuccess(text: string) {
+    this.toastr.success(text);
+  }
+
+  showError(text: string) {
+    this.toastr.error(text);
+  }
+  
 
   @Input({ required: true }) product!: any;
 
@@ -51,12 +64,13 @@ ngOnInit() {
     return this.productService.addToCart(body).subscribe({
       next: (res) => {
         console.log('product added',res);
-        alert('Product added to cart!');
+        this.showSuccess('Product added to cart!');
         this.productService.allCart().subscribe();
         this.change.detectChanges();
-      },error(err) {
+      },error: (err)=> {
         if(err.status === 401){
-          alert('You are not logged in!');
+          
+         this.showError('Please log in to add favorites.');
         }
         console.error(err);
       },
@@ -102,13 +116,13 @@ addFavorites(id: number) {
   
   const token = this.authService.getToken();
   if (!token) {
-    alert('Please log in to add favorites.');
+    this.showError('Please log in to add favorites.');
     return;
   }
 
 
   if (this.favoriteIds.includes(id)) {
-    alert('Product already in favorites');
+    this.showSuccess('Product already in favorites');
     return;
   }
 
@@ -117,12 +131,12 @@ addFavorites(id: number) {
     next: () => {
       this.favoriteIds.push(id);
       this.productService.favoriteCount.update(count => count + 1);
-      
+      this.showSuccess('Product added to favorites!');
       this.change.detectChanges();
     },
     error: (err) => {
       if(err.status === 401){
-          alert('You are not logged in!');
+          this.showError('You are not logged in!');
         }
       console.error('Error adding to favorites', err);
 

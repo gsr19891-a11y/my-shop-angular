@@ -84,14 +84,14 @@
             <input
               type="search"
               formControlName="search"
-              [placeholder]="'shop.toolbar.searchPlaceholder' | translate"
+              [placeholder]="'shop.toolbar.searchPlaceholder' | translate" class="search"
             />
           </form>
         </div>
 
         <form class="toolbar-right" [formGroup]="filterSort" (change)="onSort()">
           <div class="sort-wrapper">
-            <select formControlName="sort">
+            <select formControlName="sort" class="sort">
               <option value="">{{ 'shop.toolbar.sort.default' | translate }}</option>
               <option value="price-asc">{{ 'shop.toolbar.sort.priceLowHigh' | translate }}</option>
               <option value="price-desc">{{ 'shop.toolbar.sort.priceHighLow' | translate }}</option>
@@ -100,9 +100,6 @@
               <option value="rating">{{ 'shop.toolbar.sort.rating' | translate }}</option>
             </select>
           </div>
-          <button type="submit" class="sort-btn">
-            {{ 'shop.toolbar.sortButton' | translate }}
-          </button>
         </form>
       </section>
 

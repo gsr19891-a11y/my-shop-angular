@@ -8,6 +8,7 @@ import { Router, RouterLink } from '@angular/router';
 import { from, concatMap } from 'rxjs';
 import { LangService } from '../../../../services/lang-service';
 import { TranslatePipe } from '../../../../pipes/translate-pipe';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-card-page',
@@ -22,12 +23,23 @@ export class CardPage {
   cartItems!: CarResponse | null;
   currentQuantity = 1;
 
+   private toastr = inject(ToastrService);
   constructor(
     private authService: AuthService,
     private change: ChangeDetectorRef,
     private productService: ProductService,
     private router: Router,
   ) {}
+
+   showSuccess(text: string) {
+    this.toastr.success(text);
+  }
+
+  showError(text: string) {
+    this.toastr.error(text);
+  }
+  
+
 
   ngOnInit() {
     this.token = this.authService.getToken();
@@ -115,6 +127,7 @@ export class CardPage {
     this.productService.checkout().subscribe({
       next: (res) => {
         console.log('checkout success:', res);
+        this.showSuccess('Order placed successfully!');
 
         this.authService.getUser().subscribe({
           next: (res) => {

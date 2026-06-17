@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from "@angular/router";
 import { LangService } from '../../../../services/lang-service';
 import { TranslatePipe } from '../../../../pipes/translate-pipe';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-favorites-page',
@@ -16,6 +17,8 @@ export class FavoritesPage {
   allFavorites!: any | null;
   cartMessage: string | null = null;
 
+    private toastr = inject(ToastrService);
+
 
 langService = inject(LangService)
   constructor(
@@ -26,6 +29,14 @@ langService = inject(LangService)
   ){}
 
 
+  
+   showSuccess(text: string) {
+    this.toastr.success(text);
+  }
+
+  showError(text: string) {
+    this.toastr.error(text);
+  }
 
 
 
@@ -41,7 +52,7 @@ ngOnInit(): void {
       this.productService.allFavoritesCart.set(res?.data?.items || []);
       this.change.detectChanges();
     },
-    error: (err) => console.error('Ошибка при загрузке избранного:', err)
+    error: (err) => console.error('error', err)
   });
 
   this.getFavorites();
@@ -70,6 +81,7 @@ getStars(rating: number): string[] {
     return this.productService.addToCart(body).subscribe({
       next: (res) => {
         console.log('product added',res);
+        this.showSuccess('Product added to cart!');
         this.productService.allCart().subscribe();
 
         this.change.detectChanges();

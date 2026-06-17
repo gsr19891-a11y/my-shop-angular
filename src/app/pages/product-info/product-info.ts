@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth-service';
 import { LangService } from '../../services/lang-service';
 import { TranslatePipe } from '../../pipes/translate-pipe';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-info',
@@ -23,6 +24,7 @@ export class ProductInfo {
   favoriteIds: number[] = [];
 
   langService = inject(LangService)
+  private toastr = inject(ToastrService)
 
 
 
@@ -33,6 +35,18 @@ export class ProductInfo {
     private router: Router,
     private authService: AuthService
   ) {}
+
+
+
+    showSuccess(text: string) {
+    this.toastr.success(text);
+  }
+
+  showError(text: string) {
+    this.toastr.error(text);
+  }
+  
+
   id!: number;
   public productId!: ProductIdInterfaceFull | null;
 
@@ -85,10 +99,10 @@ export class ProductInfo {
       next: (res) => {
         this.productService.allCart().subscribe();
         console.log('product added',res);
-        alert('Product added to cart!');
+        this.showSuccess('Product added to cart!');
       },error:(err) =>{
         if(err.status === 401){
-          alert('You are not logged in!');
+          this.showError('You are not logged in!');
           this.router.navigate(['/auth/login']);
           this.change.detectChanges();
         }
@@ -126,12 +140,14 @@ addFavorites(id: number) {
       
     
       this.change.detectChanges();
-      
+       this.showError('Please log in to add favorites.');
       console.log('Product added to UI state');
     },
     error: (err) => {
       if (err.status === 400) {
+        this.showSuccess('Product already in favorites');
         this.removeFromFavorites(id);
+
       }
     }
   });
@@ -180,7 +196,7 @@ toggleFavorite(id: number) {
   }
 
   if(!this.authService.getToken()){
-    return alert('You are not logged in!');
+    return this.showError('You are not logged in!');
    
   }
 }
