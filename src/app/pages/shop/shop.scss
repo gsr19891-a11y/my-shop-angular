@@ -936,7 +936,7 @@ input::-webkit-search-results-decoration {
     transition:
       transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
       visibility 0.4s;
-    height: 100% !important;
+    height: max-content !important;
 
     &.open {
       visibility: visible;
@@ -994,6 +994,7 @@ animation: loading 3s ease-in-out infinite;
       width: 100% !important;
       box-sizing: border-box !important;
       padding-left: 30px !important;
+      padding: 10px 5px !important;
     }
   }
 
@@ -1002,18 +1003,21 @@ animation: loading 3s ease-in-out infinite;
     grid-row: 2 / 3 !important;
     grid-column: 2 / 3 !important;
     width: 100% !important;
+  
     
     .sort-wrapper {
       width: 100% !important;
       
+      
       select {
         width: 100% !important;
         box-sizing: border-box !important;
+        padding: 10px 5px !important;
       }
     }
   }
 
-  // Кнопка фильтров (первая ячейка во втором ряду)
+ 
   .open-filter {
     display: flex !important;
     visibility: visible !important;
@@ -1021,6 +1025,7 @@ animation: loading 3s ease-in-out infinite;
     grid-column: 1 / 2 !important;
     width: 100% !important;
     box-sizing: border-box !important;
+
   }
 
   .featured-section {
@@ -1038,10 +1043,7 @@ animation: loading 3s ease-in-out infinite;
   }
 
   .shop-toolbar {
-    // display: flex;
-    // flex-wrap: wrap !important;
-    // justify-content: center !important;
-    // align-items: center !important;
+
     display: grid !important;
     grid-template-columns: 1fr 1fr!important;
     padding: 5px !important;
@@ -1049,6 +1051,7 @@ animation: loading 3s ease-in-out infinite;
     width: 100% !important;
     gap: 5px !important;
     place-items: center !important;
+    margin-bottom: 20px;
 
  
     i {
@@ -1056,7 +1059,7 @@ animation: loading 3s ease-in-out infinite;
     }
 
     button {
-      padding: 2px 5px !important;
+       padding: 10px 5px !important;
       font-size: 12px !important;
     }
     input {
@@ -1081,7 +1084,7 @@ animation: loading 3s ease-in-out infinite;
     transition:
       transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
       visibility 0.4s;
-    height: 100% !important;
+    height: max-content !important;
 
     label {
       padding: 2px !important;
@@ -1132,7 +1135,7 @@ animation: loading 3s ease-in-out infinite;
   }
 
   .pages-div {
-    margin: 0 !important;
+    margin-top: 20px;
     padding: 0 !important;
     gap: 2px !important;
 
