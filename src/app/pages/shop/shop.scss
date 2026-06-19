@@ -6,6 +6,7 @@ $bg-light: #f8f8f8;
 
 .shop {
   width: 100%;
+  min-width: 320px !important;
 
   .sort-btn {
     border: none;
@@ -981,7 +982,7 @@ animation: loading 3s ease-in-out infinite;
 
 
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (min-width: 0px) and (max-width: 767px) {
 
   .search-wrapper {
     grid-row: 1 / 2 !important;

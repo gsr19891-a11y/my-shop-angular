@@ -5,6 +5,7 @@
   top: 0;
   z-index: 1000;
   padding: 0px 10px;
+  min-width: 320px !important;
 
   header {
     max-width: 1200px;
@@ -312,6 +313,7 @@ select {
 }
 
 .header {
+
   select {
     margin-left: 15px;
   }
@@ -326,9 +328,11 @@ select {
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (min-width: 0px) and (max-width: 767px) {
+
   header {
-    padding: 3px !important;
+    
+    padding: 10px !important;
     padding-right: 10px !important;
   }
   .background {
@@ -358,4 +362,11 @@ select {
   .categories-card {
     display: none !important;
   }
+}
+
+@media screen and (min-width: 0px) and (max-width: 340px) {
+
+.icon-svg{
+display: none !important;
+}
 }

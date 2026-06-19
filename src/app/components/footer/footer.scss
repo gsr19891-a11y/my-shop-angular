@@ -12,6 +12,7 @@ footer {
   flex-wrap: wrap;
   gap: 50px;
   position: relative;
+  min-width: 320px !important;
 
   p {
     display: flex;
@@ -169,4 +170,75 @@ $color-button-hover: #fa5741;
 }
   
 }
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+
+  .comment-section {
+  width: 80% !important;
+
+  padding: 10px !important;
+
+  margin-left: 0px !important; 
+  margin-top: 0px !important;
+
+  top: 20% !important;
+  left: 10% !important;
+
+
+
+  h2 {
+
+      font-size: 20px !important;
+
+    margin: 0 0 8px 0 !important;
+  }
+
+  .subtitle {
+
+
+    font-size: 13px !important;
+    margin: 0 0 14px 0 !important;
+  }
+
+  .name-div {
+
+
+    label {
+      font-size: 12px !important;
+  
+      margin-bottom: 2px !important;
+
+
+    }
+
+    input, select, textarea {
+
+      padding: 5px 10px !important;
+  
+      font-size: 12px !important;
+   
+    }
+
+    textarea {
+      min-height: 50px !important;
+      font-size: 10px !important;
+    }
+
+    select {
+      padding-right: 20px !important;
+    }
+  }
+
+.submit-btn,
+  .close-btn {
+
+    padding: 5px !important;
+
+    font-size: 14px !important;
+}
+}
+
+
 }
